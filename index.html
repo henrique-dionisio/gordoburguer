@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hambúrguer artesanal feito na hora, com ingredientes frescos. GordoBurger é sabor que estaciona perto de você!">
+    <meta name="keywords" content="hamburguer, food truck, gordoburger, artesanal, lanche">
+    <meta name="author" content="GordoBurger">
+    <title>GordoBurguer | Hamburgueria Artesanal</title>
+    <link rel="icon" type="image/png" href="/assets/logo-icon.png">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/assets/logo-gordoburger.png" alt="logo do GordoBurger">
+                <h1>GordoBurguer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#cardapio">Cardápio</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>O sabor que estaciona perto de você</h2>
+            <p>Hambúrgueres artesanais, feitos na hora, com ingredientes frescos e muito sabor!</p>
+            <a href="#cardapio" class="btn">Ver Cardápio</a>
+        </div>
+    </section>
+
+    <!-- Cardápio -->
+    <section id="cardapio" class="cardapio">
+        <div class="container">
+            <h2>Nosso Cardápio</h2>
+            <div class="itens-cardapio">
+
+                <div class="item" onclick="abrirModal('Smash Bacon', '2 carnes smash 80g, queijo, bacon crocante e molho especial.', 'R$ 22,00')">
+                    <img src="/assets/smash-bacon.jpg" alt="Smash Bacon Duplo">
+                    <h3>🔥 Smash Bacon</h3>
+                    <p>2 carnes smash 80g, queijo, bacon e molho especial.</p>
+                    <span>R$ 22,00</span>
+                </div>
+
+                <div class="item" onclick="abrirModal('Cheddar Melt', 'Pão brioche, carne 150g, cheddar cremoso e cebola caramelizada.', 'R$ 20,00')">
+                    <img src="/assets/cheddar-melt.jpg" alt="Cheddar Melt">
+                    <h3>🧀 Cheddar Melt</h3>
+                    <p>Carne 150g, cheddar cremoso e cebola caramelizada.</p>
+                    <span>R$ 20,00</span>
+                </div>
+
+                <div class="item" onclick="abrirModal('Porção de Batata', 'Batata frita crocante, cheddar e bacon.', 'R$ 15,00')">
+                    <img src="/assets/porcao-batata-bacon.jpeg" alt="Porção de batata frita com cheddar e bacon">
+                    <h3>🍟 Porção de Batata</h3>
+                    <p>Batata frita com cheddar e bacon.</p>
+                    <span>R$ 15,00</span>
+                </div>
+
+                <div class="item" onclick="abrirModal('Combo Trailer', '1 Hambúrguer + 1 Porção + 1 Refri.', 'R$ 35,00')">
+                    <img src="/assets/combo.jpg" alt="Combo Hamburguer + batata + refri">
+                    <h3>🍔 Combo Trailer</h3>
+                    <p>1 Hambúrguer + Porção de batata + Refri 250mL.</p>
+                    <span>R$ 35,00</span>
+                </div>
+
+                <div class="item" onclick="abrirModal('Gordo Triplo', '3 Hambúrgueres + 3 Fatias de queijo cheddar + pão brioche, alface americana, cebola roxa, tomate e molho especial.', 'R$ 48,00')">
+                    <img src="/assets/gordo-triplo.png" alt="Gordo Triplo">
+                    <h3>🍔 Gordo Triplo</h3>
+                    <p>3 Hambúrgueres + 3 Fatias de queijo cheddar + bacon + pão brioche, alface americana, cebola roxa, tomate e molho especial.</p>
+                    <span>R$ 48,00</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section id="galeria" class="galeria">
+        <div class="container">
+            <h2>Galeria de Sabores</h2>
+            <div class="carousel">
+                <div class="slide"><img src="/assets/smash-burguer.jpg" alt="Burger"></div>
+                <div class="slide"><img src="/assets/batata-frita-bacon-alho.jpg" alt="Batata frita"></div>
+                <div class="slide"><img src="/assets/cheese-burguer.jpeg" alt="Cheeseburger"></div>
+                <div class="slide"><img src="/assets/combo-burguer.jpeg" alt="Combo"></div>
+                <div class="slide"><img src="/assets/modelo1.jpg" alt="Hamburguer Artesanal 1"></div>
+                <div class="slide"><img src="/assets/modelo2.jpeg" alt="Hamburguer Artesanal 2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Fale Conosco</h2>
+            <p>Peça seu lanche pelo WhatsApp ou venha até nosso trailer.</p>
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn-whatsapp">Pedir pelo WhatsApp</a>
+
+            <div class="contato-info">
+
+                <div class="horarios">
+                    <h3>⏰ Horários de Funcionamento</h3>
+                    <p>🗓️ Segunda a Sexta: 18:00 às 22:30</p>
+                    <p>🗓️ Sábado e Domingo: 18:00 às 23:00</p>
+                    <p>📍 Estamos aguardando seu pedido!</p>
+                </div>
+
+                <div class="mapa">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7397.857337727242!2d-47.426576266269166!3d-22.014043955620792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94c8074d90b1f019%3A0x56859a1fdeda2ff1!2sHorto%20Florestal%20Municipal!5e0!3m2!1spt-BR!2sbr!4v1747915980971!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 GordoBurger - Todos os direitos reservados. | Este é um site fictício, criado apenas para fins de portfólio e demonstração.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <span id="modal-price"></span>
+        </div>
+    </div>
+
+    <script src="/scripts/script.js"></script>
+
+</body>
+</html>

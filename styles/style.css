@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+  }
+
+body {
+    background-color: #0d0d0d;
+    color: #f1faee;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Header */
+header .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+header .logo img {
+    height: 100px;
+}
+
+header .logo h1 {
+    font-size: 36px;
+    color: #fff;
+    margin: 0;
+}
+
+header nav ul {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #ff4c4c; 
+}
+
+header {
+    background-color: #111;
+    padding: 20px 0;
+}
+
+
+/* Hero */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+        url('/assets/fundo1.webp') center/cover no-repeat;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.hero .btn {
+    background-color: #e63946;
+    color: white;
+    padding: 14px 40px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.hero .btn:hover {
+    background-color: #ffb703;
+    color: #0d0d0d;
+}
+
+/* Cardápio */
+.cardapio, .contato {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.cardapio h2, .contato h2 {
+    margin-bottom: 50px;
+    color: #ffb703;
+    font-size: 2.8rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.itens-cardapio {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.itens-cardapio .item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+}
+
+.item {
+    border: 1px solid #333;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    background-color: #1a1a1a;
+    transition: transform 0.4s, box-shadow 0.4s;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 183, 3, 0.3);
+}
+
+.item h3 {
+    margin-bottom: 15px;
+    color: #f1faee;
+}
+
+.item p {
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.item span {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #e63946;
+    font-size: 1.3rem;
+}
+
+/* Contato */
+
+.contato-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.horarios {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 2px solid red;
+    border-radius: 20px;
+}
+
+.horarios h3 {
+    margin-bottom: 15px;
+    color: #e63946; 
+}
+
+.horarios p {
+    margin: 8px 0;
+    color: white;
+    font-weight: 500;
+}
+
+.mapa {
+    flex: 2;
+    min-width: 300px;
+}
+
+.mapa iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-radius: 12px;
+}
+
+/* Footer */
+footer {
+    background-color: #1a1a1a;
+    color: #888;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+/* Animação Scroll */
+.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Mantém os estilos anteriores */
+/* Incluindo abaixo os novos */
+
+.galeria {
+    padding: 100px 0;
+    background-attachment: fixed;
+    background-image: url('https://images.unsplash.com/photo-1606788075760-9b8e9dc9953d');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+.galeria h2 {
+    margin-bottom: 50px;
+    color: #ffb703;
+    font-size: 2.8rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+.btn-whatsapp{
+    background-color: #008000;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px; 
+    display: inline-block;
+    text-decoration: none;
+}
+
+.btn-whatsapp:hover {
+    background-color: #005d00;
+  }
+
+/* Carousel */
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+}
+
+.slide {
+    min-width: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+}
+
+.slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.slide:hover {
+    transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content h3 {
+    color: #ffb703;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #ccc;
+}
+
+.modal-content span {
+    display: block;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #e63946;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+}
+
+.close:hover {
+    color: #ffb703;
+}
+
