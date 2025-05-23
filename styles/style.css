@@ -176,6 +176,154 @@ header {
     font-size: 1.3rem;
 }
 
+/* Carrinho */
+
+.item button {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block;
+    width: 100%;
+}
+
+.item button:hover {
+    background-color: #ffb703;
+    color: #1a1a1a;
+    transform: scale(1.05);
+}
+
+.item button:active {
+    transform: scale(0.98);
+}
+
+
+.carrinho {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.carrinho h2 {
+    margin-bottom: 10px;
+    color: #ffb703;
+}
+
+.carrinho ul {
+    list-style: none;
+    padding: 0;
+}
+
+.carrinho li {
+    margin-bottom: 8px;
+}
+
+.carrinho button {
+    margin-top: 10px;
+    background-color: #e63946;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.carrinho button:hover {
+    background-color: #ffb703;
+    color: #1a1a1a;
+}
+
+/* Formulário */
+.formulario {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.8);
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.form-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    color: black;
+}
+
+.form-content h2 {
+    margin-bottom: 20px;
+    color: #e63946;
+}
+
+.form-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-content input, .form-content textarea, .form-content select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.botoes-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.botoes-form button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botoes-form button:first-child {
+    background-color: #e63946;
+    color: white;
+}
+
+.botoes-form button:first-child:hover {
+    background-color: #ffb703;
+    color: #1a1a1a;
+}
+
+.botoes-form button:last-child {
+    background-color: #ccc;
+}
+
+.botoes-form button:last-child:hover {
+    background-color: #999;
+}
+
+
 /* Contato */
 
 .contato-info {

@@ -50,6 +50,7 @@
                     <h3>🔥 Smash Bacon</h3>
                     <p>2 carnes smash 80g, queijo, bacon e molho especial.</p>
                     <span>R$ 22,00</span>
+                    <button onclick="adicionarAoCarrinho('Smash Bacon', 'R$ 22,00')">Adicionar ao Carrinho</button>
                 </div>
 
                 <div class="item" onclick="abrirModal('Cheddar Melt', 'Pão brioche, carne 150g, cheddar cremoso e cebola caramelizada.', 'R$ 20,00')">
@@ -57,6 +58,7 @@
                     <h3>🧀 Cheddar Melt</h3>
                     <p>Carne 150g, cheddar cremoso e cebola caramelizada.</p>
                     <span>R$ 20,00</span>
+                    <button onclick="adicionarAoCarrinho('Cheddar Melt', 'R$ 20,00')">Adicionar ao Carrinho</button>
                 </div>
 
                 <div class="item" onclick="abrirModal('Porção de Batata', 'Batata frita crocante, cheddar e bacon.', 'R$ 15,00')">
@@ -64,6 +66,7 @@
                     <h3>🍟 Porção de Batata</h3>
                     <p>Batata frita com cheddar e bacon.</p>
                     <span>R$ 15,00</span>
+                    <button onclick="adicionarAoCarrinho('Porção de Batata', 'R$ 15,00')">Adicionar ao Carrinho</button>
                 </div>
 
                 <div class="item" onclick="abrirModal('Combo Trailer', '1 Hambúrguer + 1 Porção + 1 Refri.', 'R$ 35,00')">
@@ -71,6 +74,7 @@
                     <h3>🍔 Combo Trailer</h3>
                     <p>1 Hambúrguer + Porção de batata + Refri 250mL.</p>
                     <span>R$ 35,00</span>
+                    <button onclick="adicionarAoCarrinho('Combo Trailer', 'R$ 35,00')">Adicionar ao Carrinho</button>
                 </div>
 
                 <div class="item" onclick="abrirModal('Gordo Triplo', '3 Hambúrgueres + 3 Fatias de queijo cheddar + pão brioche, alface americana, cebola roxa, tomate e molho especial.', 'R$ 48,00')">
@@ -78,11 +82,45 @@
                     <h3>🍔 Gordo Triplo</h3>
                     <p>3 Hambúrgueres + 3 Fatias de queijo cheddar + bacon + pão brioche, alface americana, cebola roxa, tomate e molho especial.</p>
                     <span>R$ 48,00</span>
+                    <button onclick="adicionarAoCarrinho('Gordo Triplo', 'R$ 48,00')">Adicionar ao Carrinho</button>
                 </div>
 
             </div>
         </div>
     </section>
+
+    <!-- Carrinho de Compras -->
+<div id="carrinho" class="carrinho">
+    <h2>🛒 Carrinho</h2>
+    <ul id="itens-carrinho"></ul>
+    <p id="total-carrinho">Total: R$ 0,00</p>
+    <button onclick="abrirFormulario()">Finalizar Pedido</button>
+</div>
+
+<!-- Formulário de Dados -->
+<div id="formulario" class="formulario">
+    <div class="form-content">
+        <h2>Finalizar Pedido</h2>
+        <label>Nome:
+            <input type="text" id="nome">
+        </label>
+        <label>Endereço:
+            <textarea id="endereco" rows="2"></textarea>
+        </label>
+        <label>Forma de Pagamento:
+            <select id="pagamento">
+                <option>Dinheiro</option>
+                <option>Pix</option>
+                <option>Cartão</option>
+            </select>
+        </label>
+        <div class="botoes-form">
+            <button onclick="enviarPedido()">Enviar Pedido no WhatsApp</button>
+            <button onclick="fecharFormulario()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
 
     <!-- Galeria -->
     <section id="galeria" class="galeria">
