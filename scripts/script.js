@@ -37,19 +37,26 @@ function adicionarAoCarrinho(nome, preco) {
 function atualizarCarrinho() {
     const lista = document.getElementById('itens-carrinho');
     lista.innerHTML = '';
-    let total = 0;
+    let subtotal = 0; // Usaremos subtotal para os itens
 
     carrinho.forEach((item, index) => {
         const li = document.createElement('li');
         li.innerHTML = `${item.nome} - R$ ${item.preco.toFixed(2)} <button onclick="removerItem(${index})">🗑️</button>`;
         lista.appendChild(li);
-        total += item.preco;
+        subtotal += item.preco;
     });
 
-    const taxaEntrega = 5;
-    total += taxaEntrega;
+    let totalFinal;
+    const totalCarrinhoElement = document.getElementById('total-carrinho');
 
-    document.getElementById('total-carrinho').innerText = `Total (com entrega): R$ ${total.toFixed(2)}`;
+    if (subtotal > 0) {
+        const taxaEntrega = 5; // Definir a taxa de entrega aqui
+        totalFinal = subtotal + taxaEntrega;
+        totalCarrinhoElement.innerText = `Subtotal: R$ ${subtotal.toFixed(2)}\nTaxa de Entrega: R$ ${taxaEntrega.toFixed(2)}\nTotal: R$ ${totalFinal.toFixed(2)}`;
+    } else {
+        totalFinal = 0;
+        totalCarrinhoElement.innerText = `Total: R$ ${totalFinal.toFixed(2)}`;
+    }
 }
 
 function removerItem(index) {
@@ -68,10 +75,21 @@ function fecharFormulario() {
 }
 
 /* --------------------------------------------------------------------------- */
+//Formatar o CEP
+function formatarCEP(campoCep) {
+    let cep = campoCep.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    if (cep.length > 5) {
+        cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
+    }
+    campoCep.value = cep;
+}
+
+/* --------------------------------------------------------------------------- */
 //Buscar o CEP
 function buscarCep() {
-    const cep = document.getElementById('cep').value.replace(/\D/g, '');
-    
+    const cepInput = document.getElementById('cep');
+    const cep = cepInput.value.replace(/\D/g, ''); // Remove o hífen e qualquer outro não número para a API
+
     if (cep.length !== 8) {
         alert('CEP inválido. Digite 8 números.');
         return;
@@ -82,6 +100,8 @@ function buscarCep() {
         .then(data => {
             if (data.erro) {
                 alert('CEP não encontrado.');
+                document.getElementById('rua').value = '';
+                document.getElementById('bairro').value = '';
                 return;
             }
 
@@ -90,6 +110,8 @@ function buscarCep() {
         })
         .catch(() => {
             alert('Erro ao buscar CEP.');
+            document.getElementById('rua').value = '';
+            document.getElementById('bairro').value = '';
         });
 }
 
