@@ -212,7 +212,7 @@ header {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    width: 300px;
+    width: 250px;
     max-height: 80vh;
     overflow-y: auto;
     z-index: 1000;
@@ -323,6 +323,15 @@ header {
     background-color: #999;
 }
 
+.taxa-entrega {
+    background-color: #ffeeba;
+    color: #333;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
 
 /* Contato */
 
@@ -389,7 +398,6 @@ footer {
 .galeria {
     padding: 100px 0;
     background-attachment: fixed;
-    background-image: url('https://images.unsplash.com/photo-1606788075760-9b8e9dc9953d');
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -504,3 +512,10 @@ footer {
     color: #ffb703;
 }
 
+
+@media (max-width: 600px) {
+    .slide img {
+        width: 180px;
+        height: 120px;
+    }
+}
