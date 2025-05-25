@@ -149,7 +149,7 @@ function enviarPedido() {
     mensagem += `%0A*Total: R$ ${total.toFixed(2)}*%0A%0A`;
 
     mensagem += `🧑 *Nome:* ${nome}%0A`;
-    mensagem += `🏠 *Endereço:* Rua ${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}, Bairro ${bairro}, CEP ${cep}%0A`;
+    mensagem += `🏠 *Endereço:* ${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}, Bairro ${bairro}, CEP ${cep}%0A`;
     mensagem += `💰 *Forma de Pagamento:* ${pagamento}%0A`;
 
     const numero = '5531999149772'; // ✅ Substitua pelo número da hamburgueria
