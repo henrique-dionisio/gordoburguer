@@ -72,7 +72,7 @@ header {
 /* Hero */
 .hero {
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-        url('/assets/fundo1.webp') center/cover no-repeat;
+        url('/assets/fundo-slogan.png') center/cover no-repeat;
     padding: 120px 0;
     text-align: center;
 }
@@ -109,6 +109,44 @@ header {
 .hero .btn:hover {
     background-color: #ffb703;
     color: #0d0d0d;
+}
+
+/* Estilos para os Botões de Categoria */
+.categorias-cardapio {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 10px 0;
+    display: flex; /* Adicionado para melhor alinhamento e quebra de linha */
+    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha em telas menores */
+    justify-content: center; /* Centraliza os botões no container */
+    gap: 10px; /* Espaçamento entre os botões */
+}
+
+.btn-categoria {
+    background-color: #333; /* Cor de fundo padrão */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    /* margin: 5px; Removido para usar gap */
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem; /* Ajuste opcional do tamanho da fonte */
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    text-transform: capitalize; /* Para que 'hotdog' no data-filter vire 'Hotdog' no botão se o texto do botão for igual ao data-filter */
+}
+
+.btn-categoria:hover {
+    background-color: #ffb703; /* Cor do hover da navegação */
+    color: #1a1a1a; /* Cor do texto no hover */
+    transform: translateY(-2px); /* Efeito de leve elevação */
+}
+
+.btn-categoria.active {
+    background-color: #e63946; /* Cor de destaque, como nos botões "Ver Cardápio" e "Adicionar ao Carrinho" */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(230, 57, 70, 0.5); /* Sombra suave para o botão ativo */
 }
 
 /* Cardápio */
@@ -163,7 +201,7 @@ header {
     color: #f1faee;
 }
 
-.item p {
+.descricao-lanche {
     font-size: 1rem;
     color: #ccc;
 }
@@ -176,8 +214,18 @@ header {
     font-size: 1.3rem;
 }
 
-/* Carrinho */
+/* Estilo para o aviso "Imagens meramente ilustrativas" */
+.aviso-ilustrativo {
+    font-size: 0.7rem; /* Tamanho da fonte bem pequeno */
+    color: #aaa;       /* Uma cor cinza clara, sutil */
+    text-align: center; /* Centraliza o texto abaixo da imagem */
+    margin-top: 4px;    /* Pequeno espaço entre a imagem e o aviso */
+    margin-bottom: 8px; /* Espaço entre o aviso e o título do item */
+    font-style: italic; /* Deixa o texto em itálico, comum para disclaimers */
+    line-height: 1.2;   /* Ajusta o espaçamento entre linhas se o texto quebrar */
+}
 
+/* Carrinho */
 .item button {
     background-color: #e63946;
     color: white;
@@ -203,19 +251,170 @@ header {
 }
 
 
-.carrinho {
+/* Estilos para o Novo Carrinho Flutuante */
+.carrinho-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    z-index: 1000; /* Para ficar sobre outros elementos */
+}
+
+.carrinho-icone {
+    background-color: #e63946; /* Cor de destaque do seu site */
+    color: white;
+    width: 60px;  /* Tamanho do círculo do ícone */
+    height: 60px; /* Tamanho do círculo do ícone */
+    border-radius: 50%; /* Para fazer o fundo circular */
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Necessário para posicionar o contador */
+    transition: transform 0.2s ease;
+}
+
+.carrinho-icone:hover {
+    transform: scale(1.1);
+}
+
+.carrinho-icone .icone-figura {
+    font-size: 28px; /* Tamanho do emoji/ícone do carrinho */
+}
+
+.contador-itens {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ffb703; /* Cor de destaque para o contador */
+    color: #1a1a1a; /* Cor do texto do contador */
+    border-radius: 50%;
+    padding: 4px 8px; /* Ajuste para o número de itens */
+    font-size: 13px;
+    font-weight: bold;
+    border: 2px solid white; /* Borda para destacar */
+    min-width: 15px; /* Largura mínima para manter a forma circular com 1 dígito */
+    text-align: center;
+    display: none; /* Começa escondido, aparece com JS se houver itens */
+}
+
+.carrinho-detalhes {
+    display: none; /* Começa escondido */
+    position: absolute;
+    bottom: 75px; /* Distância acima do ícone flutuante */
+    right: 0;
+    width: 300px; /* Largura do painel do carrinho */
     background-color: #1a1a1a;
     color: white;
-    padding: 20px;
+    padding: 0; /* Removido padding para controle interno */
     border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.6);
-    width: 250px;
-    max-height: 80vh;
-    overflow-y: auto;
-    z-index: 1000;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+    max-height: 75vh; /* Altura máxima */
+    /* overflow-y: auto; Movido para um container interno se necessário para o padding */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.carrinho-detalhes.aberto {
+    display: flex; /* Usar flex para organizar o conteúdo interno */
+    flex-direction: column;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.carrinho-detalhes .carrinho-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+}
+
+.carrinho-detalhes h2 {
+    margin: 0; /* Reset margin */
+    font-size: 1.4rem;
+    color: #ffb703;
+}
+
+.btn-fechar-carrinho {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px; /* Tamanho do 'X' */
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.btn-fechar-carrinho:hover {
+    color: #ffb703;
+}
+
+.carrinho-detalhes ul#itens-carrinho {
+    list-style: none;
+    padding: 10px 20px;
+    margin: 0;
+    overflow-y: auto; /* Scroll para a lista de itens */
+    flex-grow: 1; /* Faz a lista ocupar o espaço disponível */
+}
+
+.carrinho-detalhes li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.carrinho-detalhes li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.carrinho-detalhes li span { /* Para o texto do item */
+    flex-grow: 1; /* Ocupa espaço, empurrando o botão para a direita */
+    margin-right: 10px;
+}
+
+.carrinho-detalhes li button { /* Botão de remover item */
+    background: none;
+    border: none;
+    color: #ff4c4c;
+    cursor: pointer;
+    font-size: 1.1rem; /* Tamanho do ícone da lixeira */
+    padding: 0;
+    flex-shrink: 0; /* Para não encolher */
+}
+
+.carrinho-detalhes p#total-carrinho {
+    padding: 15px 20px;
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: right;
+    border-top: 1px solid #333;
+}
+
+.btn-finalizar-pedido-carrinho { /* Botão Finalizar Pedido dentro do carrinho */
+    background-color: #e63946;
+    color: white;
+    padding: 12px 20px;
+    width: calc(100% - 40px); /* Desconta o padding lateral */
+    border: none;
+    border-radius: 0 0 8px 8px; /* Arredonda cantos inferiores se colado no fundo */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 20px 20px 20px; /* Espaçamento consistente */
+    transition: background-color 0.3s;
+}
+
+.btn-finalizar-pedido-carrinho:hover {
+    background-color: #ffb703;
+    color: #1a1a1a;
 }
 
 .carrinho h2 {
@@ -333,48 +532,87 @@ header {
     text-align: center;
 }
 
+
 /* Contato */
 
+/* Contato */
 .contato-info {
     display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: wrap; /* Mantém a capacidade de quebrar linha em telas menores */
+    gap: 30px;       /* Espaçamento entre os blocos de horários e mapa */
+    justify-content: center; /* Centraliza o conjunto na página */
+    align-items: flex-start; /* ALTERADO de 'center' para 'flex-start' */
     margin-top: 20px;
 }
 
 .horarios {
-    flex: 1;
-    min-width: 250px;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    flex-grow: 1;       /* Cresce para ocupar o espaço disponível (1 parte) */
+    flex-shrink: 1;     /* Permite encolher se necessário */
+    flex-basis: 320px;  /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 35% ou 300px) */
+    min-width: 280px;   /* Largura mínima antes de quebrar a linha */
+    padding: 25px;      /* Leve ajuste no padding */
+    background-color: #1a1a1a; /* Cor de fundo para consistência com outros blocos escuros */
     border: 2px solid red;
-    border-radius: 20px;
+    border-radius: 15px;  /* Raio da borda (removida a duplicação e ajustado) */
+    /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); Se quiser manter a sombra sem a borda vermelha */
+    /* border: 2px solid red; Considere remover para o design final */
+    color: #f1faee;     /* Garante que o texto dentro seja claro */
 }
 
-.horarios h3 {
+.horarios h3 { /* Mantém ou ajusta conforme o estilo existente */
     margin-bottom: 15px;
-    color: #e63946; 
+    color: #e63946;
 }
 
-.horarios p {
+.horarios p { /* Mantém ou ajusta conforme o estilo existente */
     margin: 8px 0;
-    color: white;
+    color: white; /* ou #f1faee */
     font-weight: 500;
 }
 
 .mapa {
-    flex: 2;
-    min-width: 300px;
+    flex-grow: 2;       /* Cresce para ocupar mais espaço (2 partes) */
+    flex-shrink: 1;     /* Permite encolher */
+    flex-basis: 450px;  /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 55% ou 400px) */
+    min-width: 300px;   /* Largura mínima */
 }
 
 .mapa iframe {
     width: 100%;
-    height: 300px;
+    height: 350px; /* Altura do mapa, pode ajustar se necessário */
     border: none;
     border-radius: 12px;
+}
+
+/* Estilos para o Contato do Instagram */
+.instagram-contato {
+    text-align: center; /* Centraliza o link do Instagram */
+    margin-top: 25px;   /* Espaçamento acima */
+    margin-bottom: 20px; /* Espaçamento abaixo, antes do contato-info */
+}
+
+.instagram-contato a {
+    color: #f1faee; /* Cor do texto, igual aos parágrafos */
+    text-decoration: none;
+    font-size: 1.1rem; /* Tamanho da fonte, ajuste conforme necessário */
+    display: inline-flex; /* Para alinhar o ícone e o texto na mesma linha */
+    align-items: center;  /* Alinha verticalmente o ícone e o texto */
+    gap: 8px; /* Espaço entre o ícone e o nome de usuário */
+    padding: 8px 15px; /* Espaçamento interno para parecer um pouco com um botão/link destacado */
+    border: 1px solid #ffb703; /* Borda com a cor de destaque (amarelo) */
+    border-radius: 25px; /* Bordas arredondadas */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.instagram-contato a:hover {
+    background-color: #ffb703; /* Cor de fundo no hover (amarelo) */
+    color: #0d0d0d; /* Cor do texto no hover (preto) */
+}
+
+.icone-social {
+    width: 24px;  /* Largura do ícone */
+    height: 24px; /* Altura do ícone */
+    /* vertical-align: middle; não é necessário com display: inline-flex e align-items: center */
 }
 
 /* Footer */
@@ -411,23 +649,6 @@ footer {
     transform: translateY(50px);
     transition: 1s;
 }
-
-.btn-whatsapp{
-    background-color: #008000;
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px; 
-    display: inline-block;
-    text-decoration: none;
-}
-
-.btn-whatsapp:hover {
-    background-color: #005d00;
-  }
 
 /* Carousel */
 .carousel {

@@ -42,54 +42,119 @@
     <section id="cardapio" class="cardapio">
         <div class="container">
             <h2>Nosso Cardápio</h2>
+
+            <div class="categorias-cardapio">
+                <button class="btn-categoria" data-filter="todos" onclick="filtrarCardapio('todos')">Todos</button>
+                <button class="btn-categoria" data-filter="hamburguer" onclick="filtrarCardapio('hamburguer')">Hambúrguer</button>
+                <button class="btn-categoria" data-filter="combo-familia" onclick="filtrarCardapio('combo-familia')">Combo Família</button>
+                <button class="btn-categoria" data-filter="porcao-batata" onclick="filtrarCardapio('porcao-batata')">Porção de Batata</button>
+                <button class="btn-categoria" data-filter="bebidas" onclick="filtrarCardapio('bebidas')">Bebidas</button>
+            </div>
+
             <div class="itens-cardapio">
 
-                <div class="item" onclick="abrirModal('Smash Bacon', '2 bifes smash 80g + bacon + pão brioche, queijo e molho especial.', 'R$ 22,00')">
-                    <img src="/assets/smash-bacon.jpg" alt="Smash Bacon Duplo">
-                    <h3>🔥 Smash Bacon</h3>
-                    <p>2 bifes smash 80g + bacon + pão brioche, queijo e molho especial.</p>
-                    <span>R$ 22,00</span>
-                    <button onclick="adicionarAoCarrinho('Smash Bacon', 'R$ 22,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="porcao-batata" onclick="abrirModal('Porção de Batata', 'Batata frita 250 gramas.', 'R$ 16,00')">
+                    <img src="assets/porcao-batata.png" alt="Porção de Batata">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍟 Porção de Batata</h3>
+                    <p  class="descricao-lanche">Batata frita 250 gramas.</p>
+                    <span>R$ 16,00</span>
+                    <button onclick="adicionarAoCarrinho('Porção de Batata', 'R$ 16,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
-                <div class="item" onclick="abrirModal('Cheddar Melt', '1 bife 150g + pão brioche, cheddar cremoso e cebola caramelizada.', 'R$ 20,00')">
-                    <img src="/assets/cheddar-melt.jpg" alt="Cheddar Melt">
-                    <h3>🧀 Cheddar Melt</h3>
-                    <p>1 bife 150g + pão brioche, cheddar cremoso e cebola caramelizada.</p>
-                    <span>R$ 20,00</span>
-                    <button onclick="adicionarAoCarrinho('Cheddar Melt', 'R$ 20,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="combo-familia" onclick="abrirModal('Combo Família', '5 X-Salada + Refrigerante 2L.', 'R$ 85,00')">
+                    <img src="assets/combo-familia.png" alt="Combo Família">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔🥤 Combo Família</h3>
+                    <p  class="descricao-lanche">5 X-Salada + Refrigerante 2L.</p>
+                    <span>R$ 85,00</span>
+                    <button onclick="adicionarAoCarrinho('Combo Família', 'R$ 85,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
-                <div class="item" onclick="abrirModal('Porção de Batata do Gordão', 'Batata frita crocante, cheddar e bacon.', 'R$ 18,00')">
-                    <img src="/assets/porcao-batata-bacon.jpeg" alt="Porção de batata frita com cheddar e bacon">
-                    <h3>🍟 Porção de Batata do Gordão</h3>
-                    <p>Batata frita crocante com cheddar e bacon.</p>
-                    <span>R$ 18,00</span>
-                    <button onclick="adicionarAoCarrinho('Porção de Batata do Gordão', 'R$ 18,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="bebidas" onclick="abrirModal('Guaraná 2L', 'R$ 12,00')">
+                    <img src="assets/guarana-2l.png" alt="Guaraná 2L">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🥤 Guaraná 2L</h3>
+                    <span>R$ 12,00</span>
+                    <button onclick="adicionarAoCarrinho('Guaraná 2L', 'R$ 12,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
-                <div class="item" onclick="abrirModal('Combo Trailer', '1 Smash Bacon + 1 Porção + 1 Refri.', 'R$ 50,00')">
-                    <img src="/assets/combo.jpg" alt="Combo Hamburguer + batata + refri">
-                    <h3>🍔 Combo Trailer</h3>
-                    <p>1 Smash Bacon + Porção de batata + Refri 250mL.</p>
-                    <span>R$ 50,00</span>
-                    <button onclick="adicionarAoCarrinho('Combo Trailer', 'R$ 50,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="bebidas" onclick="abrirModal('Coca-Cola 2L', 'R$ 13,00')">
+                    <img src="assets/coca-cola-2l.png" alt="Coca-Cola 2L">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🥤 Coca-Cola 2L</h3>
+                    <span>R$ 13,00</span>
+                    <button onclick="adicionarAoCarrinho('Coca-Cola 2L', 'R$ 13,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
-                <div class="item" onclick="abrirModal('Gordo Triplo', '3 Hambúrgueres + 3 Fatias de queijo cheddar + pão brioche, alface americana, cebola roxa, tomate e molho especial.', 'R$ 48,00')">
-                    <img src="/assets/gordo-triplo.png" alt="Gordo Triplo">
-                    <h3>🍔 Gordo Triplo</h3>
-                    <p>3 Hambúrgueres + 3 Fatias de queijo cheddar + bacon + pão brioche, alface americana, cebola roxa, tomate e molho especial.</p>
-                    <span>R$ 48,00</span>
-                    <button onclick="adicionarAoCarrinho('Gordo Triplo', 'R$ 48,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="bebidas" onclick="abrirModal('Coca lata', 'R$ 6,00')">
+                    <img src="assets/coca-lata.png" alt="Coca lata">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🥤 Coca lata</h3>
+                    <span>R$ 6,00</span>
+                    <button onclick="adicionarAoCarrinho('Coca lata', 'R$ 6,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
-                <div class="item" onclick="abrirModal('Costela do Gordão', 'Hambúrguer + cheddar + costela bovina desfiada + pão brioche, cebola na chapa, picles e maionese da casa.', 'R$ 42,00')">
-                    <img src="/assets/gordo-costela.jpg" alt="Costela do Gordão">
-                    <h3>🍔 Costela do Gordão</h3>
-                    <p>Hambúrguer + cheddar + costela bovina desfiada + pão brioche, cebola na chapa, picles e maionese da casa.</p>
-                    <span>R$ 42,00</span>
-                    <button onclick="adicionarAoCarrinho('Costela do Gordão', 'R$ 42,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                <div class="item" data-category="bebidas" onclick="abrirModal('Guaraná lata', 'R$ 6,00')">
+                    <img src="assets/guarana-lata.png" alt="Guaraná lata">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🥤 Guaraná lata</h3>
+                    <span>R$ 6,00</span>
+                    <button onclick="adicionarAoCarrinho('Guaraná lata', 'R$ 6,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Burguer', 'Pão + hambúrguer + presunto, mussarela e maionese.', 'R$ 15,50')">
+                    <img src="assets/x-burguer.png" alt="X Burguer">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Burguer</h3>
+                    <p class="descricao-lanche">Pão + hambúrguer + presunto, mussarela e maionese.</p>
+                    <span>R$ 15,50</span>
+                    <button onclick="adicionarAoCarrinho('X Burguer', 'R$ 15,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Salada', 'Pão + hambúrguer + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 16,50')">
+                    <img src="assets/x-salada.png" alt="X Salada">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Salada</h3>
+                    <p class="descricao-lanche">Pão + hambúrguer + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
+                    <span>R$ 16,50</span>
+                    <button onclick="adicionarAoCarrinho('X Salada', 'R$ 16,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Salada Duplo', 'Pão + 2 hambúrgueres + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 22,50')">
+                    <img src="assets/x-salada-duplo.png" alt="X Salada Duplo">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Salada Duplo</h3>
+                    <p class="descricao-lanche">Pão + 2 hambúrgueres + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
+                    <span>R$ 22,50</span>
+                    <button onclick="adicionarAoCarrinho('X Salada Duplo', 'R$ 22,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Bacon', 'Pão + hambúrguer + bacon + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 23,50')">
+                    <img src="assets/x-bacon.png" alt="X Bacon">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Bacon</h3>
+                    <p class="descricao-lanche">Pão + hambúrguer + bacon + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
+                    <span>R$ 23,50</span>
+                    <button onclick="adicionarAoCarrinho('X Bacon', 'R$ 23,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Tudo', 'Pão + hambúrguer + bacon + calabresa + ovo + presunto, milho, mussarela, maionese, ketchup, alface e tomate.', 'R$ 28,50')">
+                    <img src="assets/x-tudo.png" alt="X Tudo">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Tudo</h3>
+                    <p class="descricao-lanche">Pão + hambúrguer + bacon + calabresa + ovo + presunto, milho, mussarela, maionese, ketchup, alface e tomate.</p>
+                    <span>R$ 28,50</span>
+                    <button onclick="adicionarAoCarrinho('X Tudo', 'R$ 28,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
+                </div>
+
+                <div class="item" data-category="hamburguer" onclick="abrirModal('X Egg', 'Pão + hambúrguer + ovo + mussarela, maionese, ketchup, alface e tomate.', 'R$ 18,50')">
+                    <img src="assets/x-egg.png" alt="X Egg">
+                    <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
+                    <h3>🍔 X Egg</h3>
+                    <p class="descricao-lanche">Pão + hambúrguer + ovo + mussarela, maionese, ketchup, alface e tomate.</p>
+                    <span>R$ 18,50</span>
+                    <button onclick="adicionarAoCarrinho('X Egg', 'R$ 18,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
                 </div>
 
             </div>
@@ -97,11 +162,21 @@
     </section>
 
     <!-- Carrinho de Compras -->
-<div id="carrinho" class="carrinho">
-    <h2>🛒 Carrinho</h2>
-    <ul id="itens-carrinho"></ul>
-    <p id="total-carrinho">Total: R$ 0,00</p>
-    <button onclick="abrirFormulario()">Finalizar Pedido</button>
+<div id="carrinho-container" class="carrinho-container">
+    <div id="carrinho-icone" class="carrinho-icone" onclick="toggleCarrinhoDetalhes()">
+        <span class="icone-figura">🛒</span>
+        <span id="contador-itens-carrinho" class="contador-itens">0</span>
+    </div>
+    <div id="carrinho-detalhes" class="carrinho-detalhes">
+        <div class="carrinho-header">
+            <h2>Seu Carrinho</h2>
+            <button class="btn-fechar-carrinho" onclick="toggleCarrinhoDetalhes()">×</button>
+        </div>
+        <ul id="itens-carrinho">
+            </ul>
+        <p id="total-carrinho">Total: R$ 0,00</p>
+        <button class="btn-finalizar-pedido-carrinho" onclick="abrirFormularioEFecharDetalhes()">Finalizar Pedido</button>
+    </div>
 </div>
 
 <!-- Formulário de Dados -->
@@ -151,12 +226,12 @@
         <div class="container">
             <h2>Galeria de Sabores</h2>
             <div class="carousel">
-                <div class="slide"><img src="/assets/smash-burguer.jpg" alt="Burger"></div>
-                <div class="slide"><img src="/assets/batata-frita-bacon-alho.jpg" alt="Batata frita"></div>
-                <div class="slide"><img src="/assets/cheese-burguer.jpeg" alt="Cheeseburger"></div>
-                <div class="slide"><img src="/assets/combo-burguer.jpeg" alt="Combo"></div>
-                <div class="slide"><img src="/assets/modelo1.jpg" alt="Hamburguer Artesanal 1"></div>
-                <div class="slide"><img src="/assets/modelo2.jpeg" alt="Hamburguer Artesanal 2"></div>
+                <div class="slide"><img src="/assets/x-tudo.png" alt="X-Tudo"></div>
+                <div class="slide"><img src="/assets/porcao-batata.png" alt="Batata frita"></div>
+                <div class="slide"><img src="/assets/combo-familia.png" alt="Combo família"></div>
+                <div class="slide"><img src="/assets/x-egg.png" alt="X-Egg"></div>
+                <div class="slide"><img src="/assets/dog-duplo.png" alt="Dog duplo"></div>
+                <div class="slide"><img src="/assets/dog-tudo.png" alt="Dog tudo"></div>
             </div>
         </div>
     </section>
@@ -165,8 +240,15 @@
     <section id="contato" class="contato">
         <div class="container">
             <h2>Fale Conosco</h2>
-            <p>Peça seu lanche pelo WhatsApp ou venha até nosso trailer.</p>
-            <a href="https://wa.me/5511999999999" target="_blank" class="btn-whatsapp">Pedir ajuda pelo WhatsApp</a>
+            <p>Peça já o seu lanche!!</p><br>
+            <p>☎️(31) 99914-9772</p><br>
+            <div class="instagram-contato">
+                <a href="https://www.instagram.com/luizhenrique_dionisio/" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/icon-instagram.png" alt="Instagram GordoBurger" class="icone-social">
+                    @luizhenrique_dionisio
+                </a>
+
+            <div class="contato-info">
 
             <div class="contato-info">
 
