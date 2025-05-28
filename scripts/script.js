@@ -1,7 +1,7 @@
 // Animação Scroll
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
             entry.target.classList.add('show');
         }
     });
@@ -12,12 +12,10 @@ hiddenElements.forEach((el) => observer.observe(el));
 
 /* --------------------------------------------------------------------------- */
 // Filtrar Cardápio por Categoria
-
 function filtrarCardapio(categoria) {
     const itens = document.querySelectorAll('#cardapio .itens-cardapio .item');
     const botoesCategoria = document.querySelectorAll('.categorias-cardapio .btn-categoria');
 
-    // Atualiza o estado ativo dos botões
     botoesCategoria.forEach(botao => {
         if (botao.getAttribute('data-filter') === categoria) {
             botao.classList.add('active');
@@ -26,160 +24,39 @@ function filtrarCardapio(categoria) {
         }
     });
 
-    // Filtra os itens
     itens.forEach(item => {
         const itemCategoria = item.getAttribute('data-category');
-        // Verifica se o item possui a classe 'show' da animação de scroll
-        const isItemVisibleByScroll = item.classList.contains('show');
-
         if (categoria === 'todos' || itemCategoria === categoria) {
-            item.style.display = ''; // Reseta para o display padrão (flex item)
-            // Se o item estava escondido pelo filtro e agora deve aparecer,
-            // e já tinha a classe 'show' (ou seja, já passou pela animação de entrada),
-            // ou se a animação de entrada só ocorre uma vez, não precisamos fazer nada extra aqui
-            // para re-animar, a menos que desejado.
-            // Se o item for revelado e estiver no viewport, o IntersectionObserver
-            // deve adicionar a classe 'show' se ela não estiver presente.
+            item.style.display = '';
         } else {
             item.style.display = 'none';
-            // Opcional: se quiser que a animação de entrada possa ocorrer novamente
-            // quando o item for re-exibido, você pode remover a classe 'show'.
-            // item.classList.remove('show'); // Isso faria ele animar novamente ao ser re-exibido e scrollado.
         }
     });
 }
 
-// Define o botão "Todos" como ativo e mostra todos os itens ao carregar a página.
-document.addEventListener('DOMContentLoaded', () => {
-    const todosButton = document.querySelector(".btn-categoria[data-filter='todos']");
-    if (todosButton) {
-        todosButton.classList.add('active');
-    }
-    // Não é necessário chamar filtrarCardapio('todos') aqui se todos os itens
-    // já estão visíveis por padrão no HTML. A função é para cliques.
-});
-
 /* --------------------------------------------------------------------------- */
 // Modal
-function abrirModal(titulo, descricao, preco){
+function abrirModal(titulo, descricao, preco) {
     document.getElementById('modal').style.display = 'flex';
     document.getElementById('modal-title').innerText = titulo;
-    document.getElementById('modal-desc').innerText = descricao;
+    // Se a descrição não existir para um item (ex: bebidas no seu HTML atual), não mostre "undefined"
+    document.getElementById('modal-desc').innerText = descricao || ''; 
     document.getElementById('modal-price').innerText = preco;
 }
 
-function fecharModal(){
+function fecharModal() {
     document.getElementById('modal').style.display = 'none';
 }
 
 /* --------------------------------------------------------------------------- */
-
-let tipoEntregaSelecionado = null; // Pode ser 'retirada' ou 'entrega'
+// Variáveis Globais para o Pedido e Carrinho
+let carrinho = [];
+let tipoEntregaSelecionado = null; // 'retirada' ou 'entrega'
 const taxaEntregaFixa = 5.00;    // SEU VALOR DE FRETE FIXO PARA ENTREGA
 let taxaEntregaAtual = taxaEntregaFixa; // Valor que será usado, pode mudar para 0 se for retirada
 
-// Esta função é chamada quando o usuário clica em "Retirada no Local" ou "Entrega"
-function selecionarTipoEntrega(tipo) {
-    tipoEntregaSelecionado = tipo;
-    const btnRetirada = document.getElementById('btn-retirada');
-    const btnEntrega = document.getElementById('btn-entrega');
-    const camposEnderecoContainer = document.getElementById('campos-endereco-container');
-    const displayTaxaElement = document.getElementById('display-taxa-entrega');
-    const containerPagamento = document.getElementById('container-pagamento');
 
-    if (tipo === 'retirada') {
-        btnRetirada.classList.add('selecionado');
-        btnEntrega.classList.remove('selecionado');
-        camposEnderecoContainer.style.display = 'none'; // Esconde campos de endereço
-        taxaEntregaAtual = 0.00; // Zera a taxa para retirada
-        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')} (Retirada)`;
-    } else { // 'entrega'
-        btnEntrega.classList.add('selecionado');
-        btnRetirada.classList.remove('selecionado');
-        camposEnderecoContainer.style.display = 'block'; // Mostra campos de endereço
-        taxaEntregaAtual = taxaEntregaFixa; // Aplica a taxa fixa para entrega
-        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
-    }
-
-    if (containerPagamento) containerPagamento.style.display = 'block'; // Mostra opções de pagamento
-    verificarCampoTroco(); // Verifica se o campo de troco deve ser exibido
-    atualizarCarrinho();   // Atualiza o total no carrinho com a taxa correta
-}
-
-// Mostra/oculta o campo "Troco para:" baseado na forma de pagamento
-function verificarCampoTroco() {
-    const formaPagamento = document.getElementById('pagamento').value;
-    const campoTrocoDiv = document.getElementById('campo-troco');
-
-    if (tipoEntregaSelecionado && formaPagamento === 'Dinheiro') { // Só mostra se um tipo de entrega foi escolhido E pagamento é Dinheiro
-        campoTrocoDiv.style.display = 'block';
-    } else {
-        campoTrocoDiv.style.display = 'none';
-        if(document.getElementById('troco_para')) document.getElementById('troco_para').value = ''; // Limpa o valor se oculto
-    }
-}
-
-// Adicionar listener ao select de pagamento para chamar verificarCampoTroco
-const selectPagamento = document.getElementById('pagamento');
-if (selectPagamento) {
-    selectPagamento.addEventListener('change', verificarCampoTroco);
-}
-
-
-/* --------------------------------------------------------------------------- */
-// Carrinho de Compras
-let carrinho = [];
-
-function adicionarAoCarrinho(nome, preco) {
-    carrinho.push({ nome, preco: parseFloat(preco.replace('R$', '').replace(',', '.')) });
-    atualizarCarrinho();
-}
-
-/* --------------------------------------------------------------------------- */
-//Atualizar o carrinho
-function atualizarCarrinho() {
-    const lista = document.getElementById('itens-carrinho');
-    lista.innerHTML = '';
-    let subtotal = 0;
-
-    carrinho.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `<span>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</span> <button onclick="removerItem(${index})">🗑️</button>`;
-        lista.appendChild(li);
-        subtotal += item.preco;
-    });
-
-    const totalCarrinhoElement = document.getElementById('total-carrinho');
-    let totalFinal = subtotal;
-    let textoTaxaCarrinho = ""; // Inicializa vazio
-
-    if (carrinho.length > 0) {
-        if (tipoEntregaSelecionado === 'retirada') {
-            // taxaEntregaAtual já é 0.00
-            textoTaxaCarrinho = `Taxa de Entrega: R$ 0,00 (Retirada)`;
-            totalFinal += taxaEntregaAtual; // Adiciona 0
-        } else if (tipoEntregaSelecionado === 'entrega') {
-            // taxaEntregaAtual já é taxaEntregaFixa
-            textoTaxaCarrinho = `Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
-            totalFinal += taxaEntregaAtual;
-        } else { // Nenhum tipo de entrega selecionado ainda
-            textoTaxaCarrinho = "(Escolha Retirada ou Entrega para ver frete)";
-            // Não somamos a taxa ao totalFinal ainda, apenas mostramos o subtotal + frete
-        }
-        totalCarrinhoElement.innerHTML = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}<br>${textoTaxaCarrinho}<br>Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}${tipoEntregaSelecionado === null ? ' + Frete' : ''}`;
-    } else {
-        totalCarrinhoElement.innerText = `Total: R$ 0,00`;
-    }
-
-    atualizarContadorCarrinho(); // Função que você já tem para o ícone do carrinho
-}
-
-function removerItem(index) {
-    carrinho.splice(index, 1);
-    atualizarCarrinho();
-}
-/* ---------------------- */
-
+// Funções do Carrinho Flutuante (já presentes no seu script)
 function toggleCarrinhoDetalhes() {
     const detalhes = document.getElementById('carrinho-detalhes');
     detalhes.classList.toggle('aberto');
@@ -191,7 +68,7 @@ function atualizarContadorCarrinho() {
         const numItens = carrinho.length;
         contadorElement.innerText = numItens;
         if (numItens > 0) {
-            contadorElement.style.display = 'flex'; // Ou 'inline-block' dependendo do seu CSS
+            contadorElement.style.display = 'flex';
         } else {
             contadorElement.style.display = 'none';
         }
@@ -199,28 +76,136 @@ function atualizarContadorCarrinho() {
 }
 
 function abrirFormularioEFecharDetalhes() {
-    abrirFormulario(); // Sua função existente
+    abrirFormulario();
     const detalhes = document.getElementById('carrinho-detalhes');
     if (detalhes.classList.contains('aberto')) {
-        detalhes.classList.remove('aberto'); // Fecha o painel do carrinho
+        detalhes.classList.remove('aberto');
     }
 }
 
 /* --------------------------------------------------------------------------- */
-// Formulário
-function abrirFormulario() {
-    document.getElementById('formulario').style.display = 'flex';
+// Lógica do Pedido 
+
+// Chamada quando o usuário clica em "Retirada no Local" ou "Entrega"
+function selecionarTipoEntrega(tipo) {
+    tipoEntregaSelecionado = tipo;
+    const btnRetirada = document.getElementById('btn-retirada');
+    const btnEntrega = document.getElementById('btn-entrega');
+    const camposEnderecoContainer = document.getElementById('campos-endereco-container');
+    const displayTaxaElement = document.getElementById('display-taxa-entrega'); // No formulário
+    const containerPagamento = document.getElementById('container-pagamento');
+
+    if (tipo === 'retirada') {
+        btnRetirada.classList.add('selecionado');
+        btnEntrega.classList.remove('selecionado');
+        if(camposEnderecoContainer) camposEnderecoContainer.style.display = 'none';
+        taxaEntregaAtual = 0.00;
+        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')} (Retirada)`;
+    } else { // 'entrega'
+        btnEntrega.classList.add('selecionado');
+        btnRetirada.classList.remove('selecionado');
+        if(camposEnderecoContainer) camposEnderecoContainer.style.display = 'block';
+        taxaEntregaAtual = taxaEntregaFixa;
+        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
+    }
+
+    if (containerPagamento) containerPagamento.style.display = 'block';
+    verificarCampoTroco();
+    atualizarCarrinho();
+}
+
+// Mostra/oculta o campo "Troco para:"
+function verificarCampoTroco() {
+    const formaPagamentoElement = document.getElementById('pagamento');
+    const campoTrocoDiv = document.getElementById('campo-troco');
+
+    if (formaPagamentoElement && campoTrocoDiv) { // Verifica se os elementos existem
+        const formaPagamento = formaPagamentoElement.value;
+        if (tipoEntregaSelecionado && formaPagamento === 'Dinheiro') {
+            campoTrocoDiv.style.display = 'block';
+        } else {
+            campoTrocoDiv.style.display = 'none';
+            const trocoParaElement = document.getElementById('troco_para');
+            if (trocoParaElement) trocoParaElement.value = '';
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+// Carrinho de Compras (Funções adicionarAoCarrinho, atualizarCarrinho, removerItem)
+
+function adicionarAoCarrinho(nome, preco) {
+    carrinho.push({ nome, preco: parseFloat(preco.replace('R$', '').replace(',', '.')) });
+    atualizarCarrinho();
+    // Opcional: Feedback visual ao adicionar ao carrinho
+    const iconeCarrinho = document.getElementById('carrinho-icone');
+    if(iconeCarrinho){
+        iconeCarrinho.classList.add('shake'); // Adiciona uma classe para animar
+        setTimeout(() => iconeCarrinho.classList.remove('shake'), 500); // Remove após a animação
+    }
+}
+
+// Função atualizarCarrinho() para usar a `taxaEntregaAtual`
+function atualizarCarrinho() {
+    const lista = document.getElementById('itens-carrinho');
+    if (!lista) return; // Sai se o elemento não existir
     
-    // Resetar seleções e estados
+    lista.innerHTML = '';
+    let subtotal = 0;
+
+    carrinho.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</span> <button onclick="removerItem(${index})">🗑️</button>`;
+        lista.appendChild(li);
+        subtotal += item.preco;
+    });
+
+    const totalCarrinhoElement = document.getElementById('total-carrinho');
+    if (!totalCarrinhoElement) return;
+
+    let totalFinal = subtotal;
+    let textoTaxaCarrinho = "";
+
+    if (carrinho.length > 0) {
+        if (tipoEntregaSelecionado === 'retirada') {
+            textoTaxaCarrinho = `Taxa de Entrega: R$ 0,00 (Retirada)`;
+            totalFinal += 0; // taxaEntregaAtual é 0 para retirada
+        } else if (tipoEntregaSelecionado === 'entrega') {
+            textoTaxaCarrinho = `Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`; // taxaEntregaAtual é a taxa fixa
+            totalFinal += taxaEntregaAtual;
+        } else { // Nenhum tipo de entrega selecionado ainda
+            textoTaxaCarrinho = "(Escolha Retirada ou Entrega para ver frete)";
+            // Não somamos a taxa ao totalFinal ainda, apenas mostramos o subtotal + frete (ou apenas subtotal)
+        }
+        totalCarrinhoElement.innerHTML = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}<br>${textoTaxaCarrinho}<br>Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}${tipoEntregaSelecionado === null ? ' + Frete' : ''}`;
+    } else {
+        totalCarrinhoElement.innerText = `Total: R$ 0,00`;
+    }
+    atualizarContadorCarrinho();
+}
+
+function removerItem(index) {
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
+}
+
+/* --------------------------------------------------------------------------- */
+// Formulário (Funções abrirFormulario, fecharFormulario, formatarCEP, buscarCep)
+
+//Função abrirFormulario() para resetar os novos campos e estados
+function abrirFormulario() {
+    const formularioElement = document.getElementById('formulario');
+    if(!formularioElement) return;
+    formularioElement.style.display = 'flex';
+    
     tipoEntregaSelecionado = null;
-    taxaEntregaAtual = taxaEntregaFixa; // Volta para a taxa de entrega padrão ao abrir
+    taxaEntregaAtual = taxaEntregaFixa; 
 
     const btnRetirada = document.getElementById('btn-retirada');
     const btnEntrega = document.getElementById('btn-entrega');
     if (btnRetirada) btnRetirada.classList.remove('selecionado');
     if (btnEntrega) btnEntrega.classList.remove('selecionado');
 
-    // Esconder campos condicionais
     const camposEnderecoContainer = document.getElementById('campos-endereco-container');
     const containerPagamento = document.getElementById('container-pagamento');
     const campoTrocoDiv = document.getElementById('campo-troco');
@@ -229,47 +214,44 @@ function abrirFormulario() {
     if (containerPagamento) containerPagamento.style.display = 'none';
     if (campoTrocoDiv) campoTrocoDiv.style.display = 'none';
     
-    // Limpar campos do formulário
-    const form = document.getElementById('formulario').querySelector('.form-content');
-    if (form) { // Verifica se 'form' não é null
-        // Não vamos resetar o formulário inteiro para não perder o nome se já digitado,
-        // mas vamos limpar campos específicos.
-        // form.reset(); // Cuidado: Isso limpa TODOS os campos do formulário.
+    // Limpar campos específicos do formulário
+    const form = formularioElement.querySelector('.form-content');
+    if (form) {
+      // Limpa campos um por um para mais controle
+      const fieldsToClear = ['nome', 'observacoes', 'cep', 'rua', 'bairro', 'numero', 'complemento', 'troco_para'];
+      fieldsToClear.forEach(id => {
+        const field = form.querySelector(`#${id}`);
+        if (field) field.value = '';
+      });
+      const pagamentoSelect = form.querySelector('#pagamento');
+      if (pagamentoSelect) pagamentoSelect.selectedIndex = 0; // Reseta para a primeira opção
     }
-    // Limpar campos específicos
-    if(document.getElementById('observacoes')) document.getElementById('observacoes').value = '';
-    if(document.getElementById('troco_para')) document.getElementById('troco_para').value = '';
-    // Você pode adicionar outros campos para limpar aqui, se desejar, como os de endereço
-    // Ex: document.getElementById('cep').value = '';
     
     const displayTaxaElement = document.getElementById('display-taxa-entrega');
     if (displayTaxaElement) displayTaxaElement.innerText = '🏍️ Taxa de Entrega: (Escolha Retirada ou Entrega)';
     
-    atualizarCarrinho(); // Atualiza o carrinho (que pode estar vazio ou não)
+    atualizarCarrinho(); 
 }
 
 function fecharFormulario() {
-    document.getElementById('formulario').style.display = 'none';
+    const formularioElement = document.getElementById('formulario');
+    if (formularioElement) formularioElement.style.display = 'none';
 }
 
-/* --------------------------------------------------------------------------- */
-//Formatar o CEP
 function formatarCEP(campoCep) {
-    let cep = campoCep.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+    let cep = campoCep.value.replace(/\D/g, ''); 
     if (cep.length > 5) {
         cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
     }
     campoCep.value = cep;
 }
 
-/* --------------------------------------------------------------------------- */
-//Buscar o CEP
 function buscarCep() {
     const cepInput = document.getElementById('cep');
-    const cep = cepInput.value.replace(/\D/g, ''); // Remove o hífen e qualquer outro não número para a API
+    const cep = cepInput.value.replace(/\D/g, '');
 
     if (cep.length !== 8) {
-        alert('CEP inválido. Digite 8 números.');
+        // Removido alert daqui, pode ser que o onblur do input já trate ou o usuário só corrigiu
         return;
     }
 
@@ -282,7 +264,6 @@ function buscarCep() {
                 document.getElementById('bairro').value = '';
                 return;
             }
-
             document.getElementById('rua').value = data.logradouro;
             document.getElementById('bairro').value = data.bairro;
         })
@@ -294,20 +275,19 @@ function buscarCep() {
 }
 
 /* --------------------------------------------------------------------------- */
-// Enviar para WhatsApp
-
+// Enviar para WhatsApp 
 function enviarPedido() {
     const nome = document.getElementById('nome').value;
     const observacoes = document.getElementById('observacoes').value;
     const formaPagamento = document.getElementById('pagamento').value;
-    const trocoParaInput = document.getElementById('troco_para').value; // Pegar o valor do campo de troco
+    const trocoParaInput = document.getElementById('troco_para').value;
 
-    // Validações básicas (mantidas)
+    // Validações
     if (!nome) {
         alert('Por favor, preencha seu nome.');
         return;
     }
-    if (!tipoEntregaSelecionado) { // tipoEntregaSelecionado é sua variável global
+    if (!tipoEntregaSelecionado) {
         alert('Por favor, selecione se é para Entrega ou Retirada no Local.');
         return;
     }
@@ -315,23 +295,24 @@ function enviarPedido() {
         alert('Por favor, selecione a forma de pagamento.');
         return;
     }
+    if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+    }
 
-    // Construção da mensagem
-    let mensagem = `*Pedido - GordoBurger*%0A%0A`; // Título e uma linha em branco
+    // Montar mensagem
+    let mensagem = `*Pedido - GordoBurguer*%0A%0A`;
+
     let subtotalItens = 0;
-
     carrinho.forEach(item => {
-        // Sem espaços extras antes do emoji ou do texto
         mensagem += `🍔 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}%0A`;
         subtotalItens += item.preco;
     });
 
     mensagem += `%0A*Subtotal dos Itens:* R$ ${subtotalItens.toFixed(2).replace('.', ',')}%0A`;
 
-    // taxaEntregaAtual é sua variável global que guarda 0 para retirada ou a taxa fixa para entrega
-    let totalComFrete = subtotalItens + taxaEntregaAtual;
+    let totalComFrete = subtotalItens + taxaEntregaAtual; // taxaEntregaAtual já foi definida
 
-    // Informações de Entrega ou Retirada
     if (tipoEntregaSelecionado === 'entrega') {
         const cep = document.getElementById('cep').value;
         const rua = document.getElementById('rua').value;
@@ -343,49 +324,44 @@ function enviarPedido() {
             alert('Para entrega, por favor, preencha todos os campos de endereço obrigatórios.');
             return;
         }
-        mensagem += `🚚 *Tipo de Pedido:* Entrega%0A`;
-        mensagem += `*Taxa de Entrega:* R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}%0A`; // taxaEntregaAtual já terá o valor correto
-        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // Linha em branco após o total
-        mensagem += `🏠 *Endereço:*%0A`; // Título do endereço
-        mensagem += `${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}%0A`;
-        mensagem += `${bairro}%0A`;
-        mensagem += `Pirassununga - SP, CEP: ${cep}%0A`;
-    } else { // Retirada no local
-        mensagem += `🛍️ *Tipo de Pedido:* Retirada no Local%0A`;
-        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // Linha em branco após o total
+        mensagem += `%0A🚚 *Tipo de Pedido:* Entrega`;
+        mensagem += `%0A*Taxa de Entrega:* R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
+        mensagem += `%0A*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`;
+        
+        mensagem += `🏠 *Endereço:* ${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}, Bairro ${bairro}, CEP ${cep}%0A`;
+        
+    } else { // Retirada
+        mensagem += `%0A🛍️ *Tipo de Pedido:* Retirada no Local`;
+        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // taxaEntregaAtual é 0
     }
 
-    // Detalhes do Cliente e Pagamento
-    mensagem += `🧑 *Nome:* ${nome}%0A`;
-    if (observacoes) {
-        mensagem += `📝 *Observações:* ${observacoes}%0A`;
+    mensagem += `%0A🧑 *Nome:* ${nome}`;
+    if (observacoes && observacoes.trim() !== "") {
+        mensagem += `%0A📝 *Observações:* ${observacoes}`;
     }
-    mensagem += `💰 *Forma de Pagamento:* ${formaPagamento}%0A`;
+    mensagem += `%0A💰 *Forma de Pagamento:* ${formaPagamento}`;
     if (formaPagamento === 'Dinheiro' && trocoParaInput) {
-        const trocoParaValor = parseFloat(trocoParaInput.replace(',', '.'));
+        const trocoLimpo = trocoParaInput.replace(/[^\d,]/g, '').replace(',', '.');
+        const trocoParaValor = parseFloat(trocoLimpo);
         if (!isNaN(trocoParaValor) && trocoParaValor > 0) {
-            mensagem += `💵 *Troco para:* R$ ${trocoParaValor.toFixed(2).replace('.', ',')}%0A`;
+            mensagem += `%0A💵 *Troco para:* R$ ${trocoParaValor.toFixed(2).replace('.', ',')}`;
         }
     }
 
+    const numeroWhatsApp = '5531999149772'; // SEU NÚMERO DO WHATSAPP
 
-    const numeroWhatsApp = '5531999149772'; // Número do GordoBurger
-    // console.log("Mensagem Formatada (antes de encode):", mensagem.replace(/%0A/g, "\n")); // Para debug no console do navegador
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`, '_blank');
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
 
-    // Limpar carrinho e formulário após enviar (seu código existente)
+    // Limpar e resetar
     carrinho = [];
-    const formInputs = ['nome', 'observacoes', 'cep', 'rua', 'bairro', 'numero', 'complemento', 'troco_para'];
-    formInputs.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.value = '';
-    });
-    if (document.getElementById('pagamento')) document.getElementById('pagamento').selectedIndex = 0;
-
-    fecharFormulario();
-    // Ao reabrir o formulário com abrirFormulario(), os estados visuais e taxaEntregaAtual serão resetados.
-    atualizarCarrinho(); // Limpa o carrinho visualmente e atualiza totais
+    const form = document.getElementById('formulario').querySelector('.form-content');
+    if(form) form.reset();
+    if(document.getElementById('observacoes')) document.getElementById('observacoes').value = '';
+     
+    fecharFormulario(); // Isso esconde o formulário
+    // Após fechar, o próximo abrirFormulario() irá resetar os estados visuais e a taxa de entrega.
+    // Chamamos atualizarCarrinho() aqui para garantir que a UI do carrinho (se visível) seja limpa.
+    atualizarCarrinho();
 }
-
 
 
