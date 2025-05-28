@@ -815,3 +815,38 @@ footer {
         height: 120px;
     }
 }
+
+
+/* Mensagem customizada para loja fechada */
+#mensagem-loja-fechada {
+    background-color: #e63946; /* Vermelho para alerta */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    position: fixed; /* Fica fixo no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3000; /* Para ficar sobre todos os outros elementos */
+    display: none; /* Começa escondido */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Estilo para o ícone do carrinho quando desabilitado */
+.carrinho-icone.desabilitado {
+    background-color: #777; /* Cinza para indicar desabilitado */
+    opacity: 0.6;
+    cursor: not-allowed;
+    /* pointer-events: none; // Remove a capacidade de clique completamente */
+}
+
+/* Estilo geral para botões desabilitados (se quiser ser mais explícito que o padrão do navegador) */
+.item button:disabled,
+.btn-finalizar-pedido-carrinho:disabled {
+    background-color: #cccccc !important; /* Cinza claro */
+    color: #666666 !important;
+    cursor: not-allowed !important;
+    border: 1px solid #bbbbbb !important;
+    opacity: 0.7 !important;
+}
