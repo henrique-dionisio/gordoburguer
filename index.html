@@ -187,36 +187,62 @@
             <input type="text" id="nome">
         </label>
 
-        <label>CEP:
-            <input type="text" id="cep" maxlength="9" placeholder="Digite seu CEP" onblur="buscarCep()" oninput="formatarCEP(this)">
-        </label>
-        <label>Bairro:
-            <input type="text" id="bairro" placeholder="Bairro" readonly>
-        </label>
-        <label>Rua:
-            <input type="text" id="rua" placeholder="Rua" readonly>
+        <label>Observações (opcional):
+            <textarea id="observacoes" placeholder="Ex: tirar cebola, ponto da carne, etc."></textarea>
         </label>
 
-        <label>Número:
-            <input type="text" id="numero" placeholder="Número">
-        </label>
-        <label>Complemento:
-            <input type="text" id="complemento" placeholder="Apartamento, bloco, ponto de referência...">
-        </label>
-
-        <label>Forma de Pagamento:
-            <select id="pagamento">
-                <option>Dinheiro</option>
-                <option>Pix</option>
-                <option>Cartão de crédito</option>
-                <option>Cartão de débito</option>
-            </select>
-        </label>
-        <p class="taxa-entrega">🏍️ Taxa de Entrega: R$ 5,00</p>
-        <div class="botoes-form">
-            <button onclick="enviarPedido()">Enviar Pedido no WhatsApp</button>
-            <button onclick="fecharFormulario()">Cancelar</button>
+        <div class="tipo-entrega-container">
+            <h3>Como prefere receber?</h3>
+            <div class="opcoes-tipo-entrega">
+                <div class="opcao-entrega" id="btn-retirada" onclick="selecionarTipoEntrega('retirada')">
+                    <img src="/assets/icon-retirada.png" alt="Ícone de Retirada"> <span>Retirada no Local</span>
+                </div>
+                <div class="opcao-entrega" id="btn-entrega" onclick="selecionarTipoEntrega('entrega')">
+                    <img src="/assets/icon-entrega.png" alt="Ícone de Entrega"> <span>Entrega</span>
+                </div>
+            </div>
         </div>
+
+        <div id="campos-endereco-container" style="display:none;">
+            <label>CEP:
+                <input type="text" id="cep" maxlength="9" placeholder="Digite seu CEP" onblur="buscarCep()" oninput="formatarCEP(this)">
+            </label>
+            <label>Bairro:
+                <input type="text" id="bairro" placeholder="Bairro" readonly>
+            </label>
+            <label>Rua:
+                <input type="text" id="rua" placeholder="Rua" readonly>
+            </label>
+            <label>Número:
+                <input type="text" id="numero" placeholder="Número" onblur="tentarCalcularFreteAposNumero()"> </label>
+            <label>Complemento:
+                <input type="text" id="complemento" placeholder="Apartamento, bloco, ponto de referência...">
+            </label>
+            <p class="taxa-entrega" id="display-taxa-entrega">🏍️ Taxa de Entrega: (Escolha Entrega)</p>
+        </div>
+
+        <div id="container-pagamento" style="display:none;">
+            <label for="pagamento">Forma de Pagamento:</label>
+            <select id="pagamento">
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Pix">Pix</option>
+                <option value="CartaoCredito">Cartão de crédito</option>
+                <option value="CartaoDebito">Cartão de débito</option>
+            </select>
+
+            <div id="campo-troco" style="display:none;">
+                <label>Troco para:
+                    <input type="number" id="troco_para" placeholder="Ex: 50 (apenas números)">
+                </label>
+            </div>
+            </div>
+
+            <div class="botoes-form">
+                <button onclick="enviarPedido()">Enviar Pedido no WhatsApp</button>
+                <button onclick="fecharFormulario()">Cancelar</button>
+            </div>
+        </div>
+        
     </div>
 </div>
 

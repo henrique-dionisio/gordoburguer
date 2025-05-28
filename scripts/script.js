@@ -73,6 +73,60 @@ function fecharModal(){
 }
 
 /* --------------------------------------------------------------------------- */
+
+let tipoEntregaSelecionado = null; // Pode ser 'retirada' ou 'entrega'
+const taxaEntregaFixa = 5.00;    // SEU VALOR DE FRETE FIXO PARA ENTREGA
+let taxaEntregaAtual = taxaEntregaFixa; // Valor que será usado, pode mudar para 0 se for retirada
+
+// Esta função é chamada quando o usuário clica em "Retirada no Local" ou "Entrega"
+function selecionarTipoEntrega(tipo) {
+    tipoEntregaSelecionado = tipo;
+    const btnRetirada = document.getElementById('btn-retirada');
+    const btnEntrega = document.getElementById('btn-entrega');
+    const camposEnderecoContainer = document.getElementById('campos-endereco-container');
+    const displayTaxaElement = document.getElementById('display-taxa-entrega');
+    const containerPagamento = document.getElementById('container-pagamento');
+
+    if (tipo === 'retirada') {
+        btnRetirada.classList.add('selecionado');
+        btnEntrega.classList.remove('selecionado');
+        camposEnderecoContainer.style.display = 'none'; // Esconde campos de endereço
+        taxaEntregaAtual = 0.00; // Zera a taxa para retirada
+        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')} (Retirada)`;
+    } else { // 'entrega'
+        btnEntrega.classList.add('selecionado');
+        btnRetirada.classList.remove('selecionado');
+        camposEnderecoContainer.style.display = 'block'; // Mostra campos de endereço
+        taxaEntregaAtual = taxaEntregaFixa; // Aplica a taxa fixa para entrega
+        if (displayTaxaElement) displayTaxaElement.innerHTML = `🏍️ Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
+    }
+
+    if (containerPagamento) containerPagamento.style.display = 'block'; // Mostra opções de pagamento
+    verificarCampoTroco(); // Verifica se o campo de troco deve ser exibido
+    atualizarCarrinho();   // Atualiza o total no carrinho com a taxa correta
+}
+
+// Mostra/oculta o campo "Troco para:" baseado na forma de pagamento
+function verificarCampoTroco() {
+    const formaPagamento = document.getElementById('pagamento').value;
+    const campoTrocoDiv = document.getElementById('campo-troco');
+
+    if (tipoEntregaSelecionado && formaPagamento === 'Dinheiro') { // Só mostra se um tipo de entrega foi escolhido E pagamento é Dinheiro
+        campoTrocoDiv.style.display = 'block';
+    } else {
+        campoTrocoDiv.style.display = 'none';
+        if(document.getElementById('troco_para')) document.getElementById('troco_para').value = ''; // Limpa o valor se oculto
+    }
+}
+
+// Adicionar listener ao select de pagamento para chamar verificarCampoTroco
+const selectPagamento = document.getElementById('pagamento');
+if (selectPagamento) {
+    selectPagamento.addEventListener('change', verificarCampoTroco);
+}
+
+
+/* --------------------------------------------------------------------------- */
 // Carrinho de Compras
 let carrinho = [];
 
@@ -85,36 +139,39 @@ function adicionarAoCarrinho(nome, preco) {
 //Atualizar o carrinho
 function atualizarCarrinho() {
     const lista = document.getElementById('itens-carrinho');
-    lista.innerHTML = ''; // Limpa a lista para reconstruir
+    lista.innerHTML = '';
     let subtotal = 0;
 
     carrinho.forEach((item, index) => {
         const li = document.createElement('li');
-        // MODIFICAÇÃO 1: Melhor formatação do item na lista (com <span> para o texto)
-        // e uso de vírgula como separador decimal para os preços.
         li.innerHTML = `<span>${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</span> <button onclick="removerItem(${index})">🗑️</button>`;
         lista.appendChild(li);
         subtotal += item.preco;
     });
 
     const totalCarrinhoElement = document.getElementById('total-carrinho');
-    const taxaEntrega = 5.00; // Definir a taxa de entrega aqui
     let totalFinal = subtotal;
+    let textoTaxaCarrinho = ""; // Inicializa vazio
 
-    // MODIFICAÇÃO 2: Lógica para exibir subtotal, taxa e total (com vírgula)
-    // somente se houver itens no carrinho.
-    if (carrinho.length > 0) { // Verifica se o carrinho não está vazio
-        totalFinal += taxaEntrega;
-        // Usar innerHTML para permitir quebras de linha com <br> se desejar
-        totalCarrinhoElement.innerHTML = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}<br>Taxa de Entrega: R$ ${taxaEntrega.toFixed(2).replace('.', ',')}<br>Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}`;
+    if (carrinho.length > 0) {
+        if (tipoEntregaSelecionado === 'retirada') {
+            // taxaEntregaAtual já é 0.00
+            textoTaxaCarrinho = `Taxa de Entrega: R$ 0,00 (Retirada)`;
+            totalFinal += taxaEntregaAtual; // Adiciona 0
+        } else if (tipoEntregaSelecionado === 'entrega') {
+            // taxaEntregaAtual já é taxaEntregaFixa
+            textoTaxaCarrinho = `Taxa de Entrega: R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
+            totalFinal += taxaEntregaAtual;
+        } else { // Nenhum tipo de entrega selecionado ainda
+            textoTaxaCarrinho = "(Escolha Retirada ou Entrega para ver frete)";
+            // Não somamos a taxa ao totalFinal ainda, apenas mostramos o subtotal + frete
+        }
+        totalCarrinhoElement.innerHTML = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}<br>${textoTaxaCarrinho}<br>Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}${tipoEntregaSelecionado === null ? ' + Frete' : ''}`;
     } else {
-        totalCarrinhoElement.innerText = `Total: R$ ${totalFinal.toFixed(2).replace('.', ',')}`;
+        totalCarrinhoElement.innerText = `Total: R$ 0,00`;
     }
 
-    // MODIFICAÇÃO 3: Chamar a nova função para atualizar o contador no ícone do carrinho.
-    // Certifique-se de que a função atualizarContadorCarrinho() que te passei antes
-    // também esteja no seu arquivo script.js.
-    atualizarContadorCarrinho();
+    atualizarContadorCarrinho(); // Função que você já tem para o ícone do carrinho
 }
 
 function removerItem(index) {
@@ -153,6 +210,42 @@ function abrirFormularioEFecharDetalhes() {
 // Formulário
 function abrirFormulario() {
     document.getElementById('formulario').style.display = 'flex';
+    
+    // Resetar seleções e estados
+    tipoEntregaSelecionado = null;
+    taxaEntregaAtual = taxaEntregaFixa; // Volta para a taxa de entrega padrão ao abrir
+
+    const btnRetirada = document.getElementById('btn-retirada');
+    const btnEntrega = document.getElementById('btn-entrega');
+    if (btnRetirada) btnRetirada.classList.remove('selecionado');
+    if (btnEntrega) btnEntrega.classList.remove('selecionado');
+
+    // Esconder campos condicionais
+    const camposEnderecoContainer = document.getElementById('campos-endereco-container');
+    const containerPagamento = document.getElementById('container-pagamento');
+    const campoTrocoDiv = document.getElementById('campo-troco');
+
+    if (camposEnderecoContainer) camposEnderecoContainer.style.display = 'none';
+    if (containerPagamento) containerPagamento.style.display = 'none';
+    if (campoTrocoDiv) campoTrocoDiv.style.display = 'none';
+    
+    // Limpar campos do formulário
+    const form = document.getElementById('formulario').querySelector('.form-content');
+    if (form) { // Verifica se 'form' não é null
+        // Não vamos resetar o formulário inteiro para não perder o nome se já digitado,
+        // mas vamos limpar campos específicos.
+        // form.reset(); // Cuidado: Isso limpa TODOS os campos do formulário.
+    }
+    // Limpar campos específicos
+    if(document.getElementById('observacoes')) document.getElementById('observacoes').value = '';
+    if(document.getElementById('troco_para')) document.getElementById('troco_para').value = '';
+    // Você pode adicionar outros campos para limpar aqui, se desejar, como os de endereço
+    // Ex: document.getElementById('cep').value = '';
+    
+    const displayTaxaElement = document.getElementById('display-taxa-entrega');
+    if (displayTaxaElement) displayTaxaElement.innerText = '🏍️ Taxa de Entrega: (Escolha Retirada ou Entrega)';
+    
+    atualizarCarrinho(); // Atualiza o carrinho (que pode estar vazio ou não)
 }
 
 function fecharFormulario() {
@@ -202,49 +295,96 @@ function buscarCep() {
 
 /* --------------------------------------------------------------------------- */
 // Enviar para WhatsApp
+
 function enviarPedido() {
     const nome = document.getElementById('nome').value;
-    const cep = document.getElementById('cep').value;
-    const rua = document.getElementById('rua').value;
-    const numeroCasa = document.getElementById('numero').value;
-    const complemento = document.getElementById('complemento').value;
-    const bairro = document.getElementById('bairro').value;
-    const pagamento = document.getElementById('pagamento').value;
+    const observacoes = document.getElementById('observacoes').value;
+    const formaPagamento = document.getElementById('pagamento').value;
+    const trocoParaInput = document.getElementById('troco_para').value; // Pegar o valor do campo de troco
 
-    // Validação dos campos obrigatórios
-    if (!nome || !cep || !rua || !numeroCasa || !bairro) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+    // Validações básicas (mantidas)
+    if (!nome) {
+        alert('Por favor, preencha seu nome.');
+        return;
+    }
+    if (!tipoEntregaSelecionado) { // tipoEntregaSelecionado é sua variável global
+        alert('Por favor, selecione se é para Entrega ou Retirada no Local.');
+        return;
+    }
+    if (!formaPagamento && tipoEntregaSelecionado) {
+        alert('Por favor, selecione a forma de pagamento.');
         return;
     }
 
-    const taxaEntrega = 5;
-
-    let mensagem = `*Pedido - GordoBurguer*%0A%0A`;
-
-    let total = 0;
+    // Construção da mensagem
+    let mensagem = `*Pedido - GordoBurger*%0A%0A`; // Título e uma linha em branco
+    let subtotalItens = 0;
 
     carrinho.forEach(item => {
-        mensagem += `🍔 ${item.nome} - R$ ${item.preco.toFixed(2)}%0A`;
-        total += item.preco;
+        // Sem espaços extras antes do emoji ou do texto
+        mensagem += `🍔 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}%0A`;
+        subtotalItens += item.preco;
     });
 
-    total += taxaEntrega;
+    mensagem += `%0A*Subtotal dos Itens:* R$ ${subtotalItens.toFixed(2).replace('.', ',')}%0A`;
 
-    mensagem += `%0A🚚 *Taxa de Entrega:* R$ ${taxaEntrega.toFixed(2)}`;
-    mensagem += `%0A*Total: R$ ${total.toFixed(2)}*%0A%0A`;
+    // taxaEntregaAtual é sua variável global que guarda 0 para retirada ou a taxa fixa para entrega
+    let totalComFrete = subtotalItens + taxaEntregaAtual;
 
+    // Informações de Entrega ou Retirada
+    if (tipoEntregaSelecionado === 'entrega') {
+        const cep = document.getElementById('cep').value;
+        const rua = document.getElementById('rua').value;
+        const numeroCasa = document.getElementById('numero').value;
+        const bairro = document.getElementById('bairro').value;
+        const complemento = document.getElementById('complemento').value;
+
+        if (!cep || !rua || !numeroCasa || !bairro) {
+            alert('Para entrega, por favor, preencha todos os campos de endereço obrigatórios.');
+            return;
+        }
+        mensagem += `🚚 *Tipo de Pedido:* Entrega%0A`;
+        mensagem += `*Taxa de Entrega:* R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}%0A`; // taxaEntregaAtual já terá o valor correto
+        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // Linha em branco após o total
+        mensagem += `🏠 *Endereço:*%0A`; // Título do endereço
+        mensagem += `${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}%0A`;
+        mensagem += `${bairro}%0A`;
+        mensagem += `Pirassununga - SP, CEP: ${cep}%0A`;
+    } else { // Retirada no local
+        mensagem += `🛍️ *Tipo de Pedido:* Retirada no Local%0A`;
+        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // Linha em branco após o total
+    }
+
+    // Detalhes do Cliente e Pagamento
     mensagem += `🧑 *Nome:* ${nome}%0A`;
-    mensagem += `🏠 *Endereço:* ${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}, Bairro ${bairro}, CEP ${cep}%0A`;
-    mensagem += `💰 *Forma de Pagamento:* ${pagamento}%0A`;
+    if (observacoes) {
+        mensagem += `📝 *Observações:* ${observacoes}%0A`;
+    }
+    mensagem += `💰 *Forma de Pagamento:* ${formaPagamento}%0A`;
+    if (formaPagamento === 'Dinheiro' && trocoParaInput) {
+        const trocoParaValor = parseFloat(trocoParaInput.replace(',', '.'));
+        if (!isNaN(trocoParaValor) && trocoParaValor > 0) {
+            mensagem += `💵 *Troco para:* R$ ${trocoParaValor.toFixed(2).replace('.', ',')}%0A`;
+        }
+    }
 
-    const numero = '5531999149772'; // ✅ Substitua pelo número da hamburgueria
 
-    window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
+    const numeroWhatsApp = '5531999149772'; // Número do GordoBurger
+    // console.log("Mensagem Formatada (antes de encode):", mensagem.replace(/%0A/g, "\n")); // Para debug no console do navegador
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`, '_blank');
 
-    // Limpa carrinho e fecha o formulário após enviar
+    // Limpar carrinho e formulário após enviar (seu código existente)
     carrinho = [];
-    atualizarCarrinho();
+    const formInputs = ['nome', 'observacoes', 'cep', 'rua', 'bairro', 'numero', 'complemento', 'troco_para'];
+    formInputs.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.value = '';
+    });
+    if (document.getElementById('pagamento')) document.getElementById('pagamento').selectedIndex = 0;
+
     fecharFormulario();
+    // Ao reabrir o formulário com abrirFormulario(), os estados visuais e taxaEntregaAtual serão resetados.
+    atualizarCarrinho(); // Limpa o carrinho visualmente e atualiza totais
 }
 
 
