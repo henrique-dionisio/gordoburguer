@@ -332,7 +332,7 @@ function enviarPedido() {
         
     } else { // Retirada
         mensagem += `%0A🛍️ *Tipo de Pedido:* Retirada no Local`;
-        mensagem += `*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // taxaEntregaAtual é 0
+        mensagem += `%0A*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // taxaEntregaAtual é 0
     }
 
     mensagem += `%0A🧑 *Nome:* ${nome}`;
@@ -357,11 +357,10 @@ function enviarPedido() {
     const form = document.getElementById('formulario').querySelector('.form-content');
     if(form) form.reset();
     if(document.getElementById('observacoes')) document.getElementById('observacoes').value = '';
-     
+
+    atualizarCarrinho(); 
     fecharFormulario(); // Isso esconde o formulário
-    // Após fechar, o próximo abrirFormulario() irá resetar os estados visuais e a taxa de entrega.
-    // Chamamos atualizarCarrinho() aqui para garantir que a UI do carrinho (se visível) seja limpa.
-    atualizarCarrinho();
+    
 }
 
 
