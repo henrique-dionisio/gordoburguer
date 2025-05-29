@@ -59,7 +59,7 @@ const horariosFuncionamento = {
     0: { nomeDia: "Domingo", abre: { h: 18, m: 0 }, fecha: { h: 23, m: 0 } },
     1: { nomeDia: "Segunda-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
     2: { nomeDia: "Terça-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
-    3: { nomeDia: "Quarta-feira", abre: { h: 18, m: 0 }, fecha: { h: 20, m: 50 } },
+    3: { nomeDia: "Quarta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
     4: { nomeDia: "Quinta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
     5: { nomeDia: "Sexta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
     6: { nomeDia: "Sábado", abre: { h: 18, m: 0 }, fecha: { h: 23, m: 0 } }
@@ -388,38 +388,43 @@ function buscarCep() { // Sua função existente
 }
 
 /* --------------------------------------------------------------------------- */
-// Enviar para WhatsApp (Sua função já bem formatada e com os campos novos)
+// Enviar para WhatsApp 
 function enviarPedido() {
-    // ... (Mantenha sua função enviarPedido como você a tem agora,
-    //      pois ela já inclui a lógica para tipoEntregaSelecionado, observacoes, troco,
-    //      e a formatação da mensagem que ajustamos.)
-    // Apenas garanta que ela use a variável global `taxaEntregaAtual` corretamente.
-
-    // Vou colar aqui a última versão que fizemos para enviarPedido, que já deve estar boa:
     const nome = document.getElementById('nome').value;
     const observacoes = document.getElementById('observacoes').value;
     const formaPagamento = document.getElementById('pagamento').value;
     const trocoParaInput = document.getElementById('troco_para').value;
 
-    if (!nome) { alert('Por favor, preencha seu nome.'); return; }
-    if (!tipoEntregaSelecionado) { alert('Por favor, selecione se é para Entrega ou Retirada no Local.'); return; }
-    if (!formaPagamento && tipoEntregaSelecionado) { alert('Por favor, selecione a forma de pagamento.'); return; }
-    if (carrinho.length === 0) { alert('Seu carrinho está vazio!'); return; }
+    // Validações
+    if (!nome) {
+        alert('Por favor, preencha seu nome.');
+        return;
+    }
+    if (!tipoEntregaSelecionado) {
+        alert('Por favor, selecione se é para Entrega ou Retirada no Local.');
+        return;
+    }
+    if (!formaPagamento && tipoEntregaSelecionado) {
+        alert('Por favor, selecione a forma de pagamento.');
+        return;
+    }
+    if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio!');
+        return;
+    }
 
-    let partesMensagem = [];
-    partesMensagem.push(`*Pedido - GordoBurger*`);
+    // Montar mensagem
+    let mensagem = `*Pedido - GordoBurguer*%0A%0A`;
 
-    let itensTextoArray = [];
     let subtotalItens = 0;
     carrinho.forEach(item => {
-        itensTextoArray.push(`🍔 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}`);
+        mensagem += `🍔 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}%0A`;
         subtotalItens += item.preco;
     });
-    partesMensagem.push(itensTextoArray.join('%0A'));
 
-    let sumarioPedidoArray = [];
-    sumarioPedidoArray.push(`*Subtotal dos Itens:* R$ ${subtotalItens.toFixed(2).replace('.', ',')}`);
-    let totalComFrete = subtotalItens + taxaEntregaAtual;
+    mensagem += `%0A*Subtotal dos Itens:* R$ ${subtotalItens.toFixed(2).replace('.', ',')}%0A`;
+
+    let totalComFrete = subtotalItens + taxaEntregaAtual; // taxaEntregaAtual já foi definida
 
     if (tipoEntregaSelecionado === 'entrega') {
         const cep = document.getElementById('cep').value;
@@ -427,56 +432,50 @@ function enviarPedido() {
         const numeroCasa = document.getElementById('numero').value;
         const bairro = document.getElementById('bairro').value;
         const complemento = document.getElementById('complemento').value;
+
         if (!cep || !rua || !numeroCasa || !bairro) {
             alert('Para entrega, por favor, preencha todos os campos de endereço obrigatórios.');
             return;
         }
-        sumarioPedidoArray.push(`🚚 *Tipo de Pedido:* Entrega`);
-        sumarioPedidoArray.push(`*Taxa de Entrega:* R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`);
-        sumarioPedidoArray.push(`*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}`);
-        let enderecoTextoArray = [];
-        enderecoTextoArray.push(`🏠 *Endereço:*`);
-        enderecoTextoArray.push(`${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}`);
-        enderecoTextoArray.push(`${bairro}`);
-        enderecoTextoArray.push(`Pirassununga - SP, CEP: ${cep}`);
-        sumarioPedidoArray.push(enderecoTextoArray.join('%0A'));
-    } else { 
-        sumarioPedidoArray.push(`🛍️ *Tipo de Pedido:* Retirada no Local`);
-        sumarioPedidoArray.push(`*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}`);
+        mensagem += `%0A🚚 *Tipo de Pedido:* Entrega`;
+        mensagem += `%0A*Taxa de Entrega:* R$ ${taxaEntregaAtual.toFixed(2).replace('.', ',')}`;
+        mensagem += `%0A*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`;
+        
+        mensagem += `🏠 *Endereço:* ${rua}, Nº ${numeroCasa}${complemento ? ', ' + complemento : ''}, Bairro ${bairro}, CEP ${cep}%0A`;
+        
+    } else { // Retirada
+        mensagem += `%0A🛍️ *Tipo de Pedido:* Retirada no Local`;
+        mensagem += `%0A*Total Geral:* R$ ${totalComFrete.toFixed(2).replace('.', ',')}%0A%0A`; // taxaEntregaAtual é 0
     }
-    partesMensagem.push(sumarioPedidoArray.join('%0A'));
 
-    let detalhesFinaisArray = [];
-    detalhesFinaisArray.push(`🧑 *Nome:* ${nome}`);
+    mensagem += `%0A🧑 *Nome:* ${nome}`;
     if (observacoes && observacoes.trim() !== "") {
-        detalhesFinaisArray.push(`📝 *Observações:* ${observacoes}`);
+        mensagem += `%0A📝 *Observações:* ${observacoes}`;
     }
-    detalhesFinaisArray.push(`💰 *Forma de Pagamento:* ${formaPagamento}`);
+    mensagem += `%0A💰 *Forma de Pagamento:* ${formaPagamento}`;
     if (formaPagamento === 'Dinheiro' && trocoParaInput) {
         const trocoLimpo = trocoParaInput.replace(/[^\d,]/g, '').replace(',', '.');
         const trocoParaValor = parseFloat(trocoLimpo);
         if (!isNaN(trocoParaValor) && trocoParaValor > 0) {
-            detalhesFinaisArray.push(`💵 *Troco para:* R$ ${trocoParaValor.toFixed(2).replace('.', ',')}`);
+            mensagem += `%0A💵 *Troco para:* R$ ${trocoParaValor.toFixed(2).replace('.', ',')}`;
         }
     }
-    if (detalhesFinaisArray.length > 0) {
-        partesMensagem.push(detalhesFinaisArray.join('%0A'));
-    }
 
-    const mensagemFinal = partesMensagem.filter(part => part && part.trim() !== '').join('%0A%0A');
-    const numeroWhatsApp = '5531999149772';
-    window.open(`https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagemFinal)}`, '_blank');
+    const numeroWhatsApp = '5531999149772'; // SEU NÚMERO DO WHATSAPP
 
+    window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
+
+    // Limpar e resetar
     carrinho = [];
     const form = document.getElementById('formulario').querySelector('.form-content');
     if(form) form.reset();
     if(document.getElementById('observacoes')) document.getElementById('observacoes').value = '';
+
+    atualizarCarrinho(); 
+    fecharFormulario(); // Isso esconde o formulário
     
-    fecharFormulario();
-    // A função abrirFormulario() que será chamada na próxima vez que o form for aberto
-    // já reseta taxaEntregaAtual para taxaEntregaFixa e tipoEntregaSelecionado para null.
-    atualizarCarrinho(); // Para limpar o carrinho visualmente e resetar totais.
 }
+/* -------------------------------------------------------------------  */
 
 
 // ADICIONAR ESTE LISTENER (ou modificar o seu existente se já tiver um para DOMContentLoaded)
