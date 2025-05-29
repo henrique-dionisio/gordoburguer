@@ -88,7 +88,7 @@ function estamosAbertosAgora() {
     } else {
         let proximoHorarioMsg = "";
         if (agoraEmMinutos < abreEmMinutos) { // Ainda não abriu hoje
-            proximoHorarioMsg = `Abrimos hoje (${configHoje.nomeDia}) às ${String(configHoje.abre.h).padStart(2, '0')}:${String(configHoje.abre.m).padStart(2, '0')}.`;
+            proximoHorarioMsg = `Abriremos hoje (${configHoje.nomeDia}) às ${String(configHoje.abre.h).padStart(2, '0')}:${String(configHoje.abre.m).padStart(2, '0')}.`;
         } else { // Já fechou hoje, verificar o próximo dia
             let diaSeguinte = (diaHoje + 1) % 7;
             let tentativas = 0;
