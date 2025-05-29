@@ -536,61 +536,6 @@ header {
     text-align: center;
 }
 
-/* Estilo para o container do checkbox "Lembrar Informações" */
-.lembrar-info-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.lembrar-info-container input[type="checkbox"] {
-    width: auto;
-    margin-top: 0;
-    cursor: pointer;
-}
-
-.lembrar-info-container label {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    color: #444; /* Ajuste a cor se necessário para o tema do formulário */
-    cursor: pointer;
-    font-weight: normal;
-}
-
-/* Alerta Customizado para localStorage */
-#alerta-customizado-localStorage {
-    position: fixed;
-    bottom: 80px; /* Ajuste para não sobrepor o ícone do carrinho */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 25px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    z-index: 3001;
-    display: none; /* Começa escondido */
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-    font-size: 0.9rem;
-    text-align: center;
-    opacity: 0; /* Para efeito de fade */
-    transition: opacity 0.3s ease-in-out;
-}
-
-#alerta-customizado-localStorage.show {
-    display: block;
-    opacity: 1;
-}
-
-#alerta-customizado-localStorage.success {
-    background-color: #28a745; /* Verde */
-}
-
-#alerta-customizado-localStorage.info {
-    background-color: #17a2b8; /* Azul */
-}
-
 /*Estilos para Opções de Tipo de Entrega */
 .tipo-entrega-container {
     margin-bottom: 20px;

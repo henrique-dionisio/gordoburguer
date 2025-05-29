@@ -1,3 +1,5 @@
+// Seu script.js completo com a funcionalidade de Horário de Funcionamento integrada:
+
 // Animação Scroll
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -6,7 +8,7 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 });
-const itemElements = document.querySelectorAll('.item, .hero h2, .hero p, .hero .btn, h2');
+const hiddenElements = document.querySelectorAll('.item, .hero h2, .hero p, .hero .btn, h2');
 hiddenElements.forEach((el) => observer.observe(el));
 
 /* --------------------------------------------------------------------------- */
@@ -52,20 +54,19 @@ let carrinho = [];
 let tipoEntregaSelecionado = null;
 const taxaEntregaFixa = 5.00;
 let taxaEntregaAtual = taxaEntregaFixa;
-const LOCAL_STORAGE_KEY_USER_INFO = 'gordoBurgerUserInfo';
 
 const horariosFuncionamento = {
-    0: { nomeDia: "Domingo", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } },
-    1: { nomeDia: "Segunda-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    2: { nomeDia: "Terça-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    3: { nomeDia: "Quarta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    4: { nomeDia: "Quinta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    5: { nomeDia: "Sexta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    6: { nomeDia: "Sábado", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } }
+    0: { nomeDia: "Domingo", abre: { h: 18, m: 0 }, fecha: { h: 23, m: 0 } },
+    1: { nomeDia: "Segunda-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
+    2: { nomeDia: "Terça-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
+    3: { nomeDia: "Quarta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
+    4: { nomeDia: "Quinta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
+    5: { nomeDia: "Sexta-feira", abre: { h: 18, m: 0 }, fecha: { h: 22, m: 30 } },
+    6: { nomeDia: "Sábado", abre: { h: 18, m: 0 }, fecha: { h: 23, m: 0 } }
 };
 
 /* --------------------------------------------------------------------------- */
-// Funções de Verificação de Horário e Gerenciamento da Loja
+// Funções de Verificação de Horário e Gerenciamento da Loja (NOVAS)
 
 function estamosAbertosAgora() {
     const agora = new Date();
@@ -148,7 +149,7 @@ function gerenciarEstadoLoja() {
 }
 
 /* --------------------------------------------------------------------------- */
-// Funções do Carrinho Flutuante 
+// Funções do Carrinho Flutuante (suas funções existentes)
 function toggleCarrinhoDetalhes() {
     const detalhes = document.getElementById('carrinho-detalhes');
     if(detalhes) detalhes.classList.toggle('aberto');
@@ -162,14 +163,14 @@ function atualizarContadorCarrinho() {
     }
 }
 
-// abrirFormularioEFecharDetalhes para checar estado da loja
+// MODIFICADA: abrirFormularioEFecharDetalhes para checar estado da loja
 function abrirFormularioEFecharDetalhes() {
     const resultadoVerificacao = estamosAbertosAgora();
     if (!resultadoVerificacao.status) {
         alert(`Desculpe, estamos fechados e não é possível finalizar o pedido agora.\n${resultadoVerificacao.proximoHorario}`);
         return; 
     }
-    abrirFormulario(); 
+    abrirFormulario(); // Sua função abrirFormulario já existente e completa
     const detalhes = document.getElementById('carrinho-detalhes');
     if (detalhes && detalhes.classList.contains('aberto')) {
         detalhes.classList.remove('aberto');
@@ -177,7 +178,7 @@ function abrirFormularioEFecharDetalhes() {
 }
 
 /* --------------------------------------------------------------------------- */
-// Lógica do Pedido (selecionarTipoEntrega, verificarCampoTroco)
+// Lógica do Pedido (selecionarTipoEntrega, verificarCampoTroco - suas funções existentes)
 function selecionarTipoEntrega(tipo) {
     tipoEntregaSelecionado = tipo;
     const btnRetirada = document.getElementById('btn-retirada');
@@ -222,14 +223,16 @@ function verificarCampoTroco() {
 }
 
 /* --------------------------------------------------------------------------- */
-// Carrinho de Compras (adicionarAoCarrinho, atualizarCarrinho, removerItem)
+// Carrinho de Compras (adicionarAoCarrinho, atualizarCarrinho, removerItem - suas funções existentes com modificação em adicionarAoCarrinho)
 
-// adicionarAoCarrinho para checar estado da loja
+// MODIFICADA: adicionarAoCarrinho para checar estado da loja
 function adicionarAoCarrinho(nome, preco) {
     const resultadoVerificacao = estamosAbertosAgora();
     if (!resultadoVerificacao.status) {
         // A barra de mensagem já deve estar visível. Um alerta adicional pode ser redundante
         // mas pode ser útil se o usuário tentar clicar muito rápido.
+        // alert(`Desculpe, estamos fechados!\n${resultadoVerificacao.proximoHorario}`);
+        // Tocar um feedback visual na barra de mensagem pode ser uma alternativa:
         const msgFechado = document.getElementById('mensagem-loja-fechada');
         if (msgFechado && msgFechado.style.display === 'block') {
              msgFechado.style.transform = 'scale(1.05)';
@@ -250,7 +253,7 @@ function adicionarAoCarrinho(nome, preco) {
     }
 }
 
-// função atualizarCarrinho (já adaptada para tipoEntregaSelecionado)
+// Sua função atualizarCarrinho (já adaptada para tipoEntregaSelecionado)
 function atualizarCarrinho() {
     const lista = document.getElementById('itens-carrinho');
     if (!lista) return; 
@@ -293,11 +296,16 @@ function removerItem(index) {
 }
 
 /* --------------------------------------------------------------------------- */
-// Formulário (abrirFormulario, fecharFormulario, formatarCEP, buscarCep)
+// Formulário (abrirFormulario, fecharFormulario, formatarCEP, buscarCep - sua função abrirFormulario já está bem completa)
 
-function abrirFormulario() { 
+function abrirFormulario() { // Esta é a sua função abrirFormulario que reseta os campos
     const formularioElement = document.getElementById('formulario');
     if(!formularioElement) return;
+    
+    // A verificação se está aberto agora é feita em abrirFormularioEFecharDetalhes
+    // Se abrirFormulario for chamada de outro lugar, a verificação deve ser adicionada aqui também.
+    // Por ora, vamos assumir que o botão "Finalizar Pedido" que chama abrirFormularioEFecharDetalhes
+    // já estará desabilitado se a loja estiver fechada.
 
     formularioElement.style.display = 'flex';
     
@@ -331,29 +339,23 @@ function abrirFormulario() {
     const displayTaxaElement = document.getElementById('display-taxa-entrega');
     if (displayTaxaElement) displayTaxaElement.innerText = '🏍️ Taxa de Entrega: (Escolha Retirada ou Entrega)';
     
-    
-    if (typeof carregarInformacoesCliente === 'function') {
-        carregarInformacoesCliente(); 
-    }
-    
     atualizarCarrinho(); 
 }
 
-function fecharFormulario() { 
+function fecharFormulario() { // Sua função existente
     const formularioElement = document.getElementById('formulario');
     if (formularioElement) formularioElement.style.display = 'none';
 }
 
-function formatarCEP(campoCep) { 
+function formatarCEP(campoCep) { // Sua função existente
     let cep = campoCep.value.replace(/\D/g, ''); 
     if (cep.length > 5) {
         cep = cep.substring(0, 5) + '-' + cep.substring(5, 8);
     }
     campoCep.value = cep;
 }
-/* --------------------------------------------------------------------------- */
 
-function buscarCep() { 
+function buscarCep() { // Sua função existente
     const cepInput = document.getElementById('cep');
     if(!cepInput) return;
     const cep = cepInput.value.replace(/\D/g, '');
@@ -383,103 +385,6 @@ function buscarCep() {
             if(ruaElem) ruaElem.value = '';
             if(bairroElem) bairroElem.value = '';
         });
-}
-/* --------------------------------------------------------------------------- */
-
-// NOVA FUNÇÃO: Para exibir alertas customizados
-function exibirAlertaCustomizado(mensagem, tipo = 'info', duracao = 3000) {
-    let alertaDiv = document.getElementById('alerta-customizado-localStorage');
-    if (!alertaDiv) {
-        alertaDiv = document.createElement('div');
-        alertaDiv.id = 'alerta-customizado-localStorage';
-        document.body.appendChild(alertaDiv);
-    }
-
-    alertaDiv.textContent = mensagem;
-    alertaDiv.className = 'alerta-ls'; // Classe base
-    alertaDiv.classList.add(tipo);     // Adiciona classe do tipo (success, info)
-    alertaDiv.classList.add('show');   // Adiciona classe para mostrar com transição
-
-    // Faz o alerta desaparecer após 'duracao' milissegundos
-    setTimeout(() => {
-        alertaDiv.classList.remove('show');
-        // O CSS cuidará da transição de opacidade para esconder
-    }, duracao);
-}
-
-// NOVA FUNÇÃO: Salvar informações do cliente no localStorage
-function salvarInformacoesCliente() {
-    const nome = document.getElementById('nome').value;
-    const cep = document.getElementById('cep').value;
-    const rua = document.getElementById('rua').value;
-    const bairro = document.getElementById('bairro').value;
-    const numeroCasa = document.getElementById('numero').value;
-    const complemento = document.getElementById('complemento').value;
-
-    if (nome && cep) { // Salva apenas se houver nome e CEP, no mínimo
-        const infoCliente = {
-            nome: nome.trim(),
-            cep: cep.trim(),
-            rua: rua.trim(),
-            bairro: bairro.trim(),
-            numero: numeroCasa.trim(),
-            complemento: complemento.trim()
-        };
-        localStorage.setItem(LOCAL_STORAGE_KEY_USER_INFO, JSON.stringify(infoCliente));
-        exibirAlertaCustomizado('Suas informações foram salvas para a próxima compra!', 'success');
-    } else {
-        const checkbox = document.getElementById('lembrar-info-checkbox');
-        if (checkbox) checkbox.checked = false;
-        exibirAlertaCustomizado('Preencha pelo menos Nome e CEP para salvar as informações.', 'info');
-    }
-}
-
-// NOVA FUNÇÃO: Carregar informações do cliente do localStorage
-function carregarInformacoesCliente() {
-    const infoSalva = localStorage.getItem(LOCAL_STORAGE_KEY_USER_INFO);
-    const checkbox = document.getElementById('lembrar-info-checkbox');
-
-    if (infoSalva) {
-        try {
-            const infoCliente = JSON.parse(infoSalva);
-            // Preenche os campos apenas se eles existirem no DOM
-            const nomeElem = document.getElementById('nome');
-            const cepElem = document.getElementById('cep');
-            const ruaElem = document.getElementById('rua');
-            const bairroElem = document.getElementById('bairro');
-            const numeroElem = document.getElementById('numero');
-            const complementoElem = document.getElementById('complemento');
-
-            if(nomeElem) nomeElem.value = infoCliente.nome || '';
-            if(cepElem) cepElem.value = infoCliente.cep || '';
-            if(ruaElem) ruaElem.value = infoCliente.rua || '';
-            if(bairroElem) bairroElem.value = infoCliente.bairro || '';
-            if(numeroElem) numeroElem.value = infoCliente.numero || '';
-            if(complementoElem) complementoElem.value = infoCliente.complemento || '';
-
-            if (checkbox) checkbox.checked = true;
-
-            // Se carregou CEP e os campos de rua/bairro estão vazios (e a função buscarCep existe)
-            if (infoCliente.cep && (!infoCliente.rua || !infoCliente.bairro) && typeof buscarCep === 'function') {
-                // Disparar onblur do CEP para que buscarCep seja chamado se o campo CEP tiver valor
-                if (cepElem && cepElem.value) {
-                     cepElem.dispatchEvent(new Event('blur'));
-                }
-            }
-        } catch (e) {
-            console.error("Erro ao carregar informações do localStorage:", e);
-            localStorage.removeItem(LOCAL_STORAGE_KEY_USER_INFO);
-            if (checkbox) checkbox.checked = false;
-        }
-    } else {
-        if (checkbox) checkbox.checked = false;
-    }
-}
-
-// NOVA FUNÇÃO: Apagar informações do cliente do localStorage
-function apagarInformacoesCliente() {
-    localStorage.removeItem(LOCAL_STORAGE_KEY_USER_INFO);
-    exibirAlertaCustomizado('Suas informações não serão mais lembradas.', 'info');
 }
 
 /* --------------------------------------------------------------------------- */
@@ -513,7 +418,7 @@ function enviarPedido() {
 
     let subtotalItens = 0;
     carrinho.forEach(item => {
-        mensagem += `🔸 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}%0A`;
+        mensagem += `🍔 ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}%0A`;
         subtotalItens += item.preco;
     });
 
@@ -556,7 +461,7 @@ function enviarPedido() {
         }
     }
 
-    const numeroWhatsApp = '5531999149772'; //NÚMERO DO WHATSAPP
+    const numeroWhatsApp = '5531999149772'; // SEU NÚMERO DO WHATSAPP
 
     window.open(`https://wa.me/${numeroWhatsApp}?text=${mensagem}`, '_blank');
 
@@ -573,19 +478,20 @@ function enviarPedido() {
 /* -------------------------------------------------------------------  */
 
 
+// ADICIONAR ESTE LISTENER (ou modificar o seu existente se já tiver um para DOMContentLoaded)
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuração do IntersectionObserver para animações de scroll 
-    const observerScroll = new IntersectionObserver((entries) => { // 
+    // Configuração do IntersectionObserver para animações de scroll (se já não estiver aqui)
+    const observerScroll = new IntersectionObserver((entries) => { // Renomeei para observerScroll
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
             }
         });
     });
-    const hiddenElementsScroll = document.querySelectorAll('.item, .hero h2, .hero p, .hero .btn, h2'); 
+    const hiddenElementsScroll = document.querySelectorAll('.item, .hero h2, .hero p, .hero .btn, h2'); // Renomeei
     hiddenElementsScroll.forEach((el) => observerScroll.observe(el));
 
-    // Lógica para o botão "Todos" da categoria 
+    // Lógica para o botão "Todos" da categoria (como você já tem)
     const todosButton = document.querySelector(".btn-categoria[data-filter='todos']");
     if (todosButton) {
         const botoesCategoria = document.querySelectorAll('.categorias-cardapio .btn-categoria');
@@ -602,28 +508,9 @@ document.addEventListener('DOMContentLoaded', () => {
         gerenciarEstadoLoja();       
     }
 
-    // Listener para o select de pagamento 
+    // Listener para o select de pagamento (se ainda não estiver em outro lugar)
     const selectPagamentoElem = document.getElementById('pagamento');
     if (selectPagamentoElem) {
        selectPagamentoElem.addEventListener('change', verificarCampoTroco);
-    }
-
-
-    const lembrarInfoCheckbox = document.getElementById('lembrar-info-checkbox');
-    if (lembrarInfoCheckbox) {
-        // Verifica o estado inicial do checkbox baseado no localStorage ao carregar a página
-        if (localStorage.getItem(LOCAL_STORAGE_KEY_USER_INFO)) {
-            lembrarInfoCheckbox.checked = true;
-        } else {
-            lembrarInfoCheckbox.checked = false;
-        }
-
-        lembrarInfoCheckbox.addEventListener('change', function() {
-            if (this.checked) {
-                salvarInformacoesCliente();
-            } else {
-                apagarInformacoesCliente();
-            }
-        });
     }
 });
