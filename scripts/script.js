@@ -56,11 +56,11 @@ const LOCAL_STORAGE_KEY_USER_INFO = 'gordoBurgerUserInfo';
 
 const horariosFuncionamento = {
     0: { nomeDia: "Domingo", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } },
-    1: { nomeDia: "Segunda-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    2: { nomeDia: "Terça-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    3: { nomeDia: "Quarta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    4: { nomeDia: "Quinta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
-    5: { nomeDia: "Sexta-feira", abre: { h: 13, m: 0 }, fecha: { h: 20, m: 0 } },
+    1: { nomeDia: "Segunda-feira", abre: { h: 13, m: 0 }, fecha: { h: 22, m: 0 } },
+    2: { nomeDia: "Terça-feira", abre: { h: 13, m: 0 }, fecha: { h: 22, m: 0 } },
+    3: { nomeDia: "Quarta-feira", abre: { h: 13, m: 0 }, fecha: { h: 22, m: 0 } },
+    4: { nomeDia: "Quinta-feira", abre: { h: 13, m: 0 }, fecha: { h: 22, m: 0 } },
+    5: { nomeDia: "Sexta-feira", abre: { h: 13, m: 0 }, fecha: { h: 22, m: 0 } },
     6: { nomeDia: "Sábado", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } }
 };
 
@@ -94,7 +94,7 @@ function estamosAbertosAgora() {
             while (tentativas < 7) {
                 const configDiaSeguinte = horariosFuncionamento[diaSeguinte];
                 if (configDiaSeguinte && configDiaSeguinte.abre) {
-                    proximoHorarioMsg = `Abrimos ${configDiaSeguinte.nomeDia} às ${String(configDiaSeguinte.abre.h).padStart(2, '0')}:${String(configDiaSeguinte.abre.m).padStart(2, '0')}.`;
+                    proximoHorarioMsg = `Abriremos ${configDiaSeguinte.nomeDia} às ${String(configDiaSeguinte.abre.h).padStart(2, '0')}:${String(configDiaSeguinte.abre.m).padStart(2, '0')}.`;
                     break;
                 }
                 diaSeguinte = (diaSeguinte + 1) % 7;
