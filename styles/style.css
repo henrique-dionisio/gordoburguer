@@ -1,907 +1,1423 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-  }
+  scroll-behavior: smooth;
+}
 
 body {
-    background-color: #0d0d0d;
-    color: #f1faee;
-    font-family: 'Poppins', sans-serif;
+  background-color: #0d0d0d;
+  color: #f1faee;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 
 /* Header */
 header .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 header .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 header .logo img {
-    height: 100px;
+  height: 100px;
 }
 
 header .logo h1 {
-    font-size: 36px;
-    color: #fff;
-    margin: 0;
+  font-size: 2.25rem;
+  color: #fff;
+  margin: 0;
+}
+
+header nav {
+  margin-top: 1rem;
 }
 
 header nav ul {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  align-items: center;
+}
+
+/* ADICIONE esta nova regra para o item de login: */
+header nav ul li#menu-login {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 5px;
 }
 
 header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 header nav ul li a:hover {
-    color: #ff4c4c; 
+  color: #ff4c4c;
 }
 
 header {
-    background-color: #111;
-    padding: 20px 0;
+  background-color: #111;
+  padding: 20px 0;
 }
 
+a#btn-login {
+  /* Estilos baseados no botão preto que você enviou */
+  background-color: #1f1f1f; /* Um preto um pouco mais suave */
+  color: #fff;
+  border: 1px solid #8e918f; /* Borda cinza sutil */
+  border-radius: 40px; /* Bordas bem arredondadas */
+  font-weight: 500;
+  /* O Google usa a fonte 'Roboto', mas 'Poppins' também fica bom */
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  padding: 8px 16px 8px 12px; /* Espaçamento interno (topo, direita, baixo, esquerda) */
+  text-decoration: none;
+
+  /* Flexbox para alinhar o ícone e o texto dentro do botão */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espaço entre o logo 'G' e o texto */
+
+  transition: background-color .3s, box-shadow .3s;
+}
+
+a#btn-login:hover {
+  background-color: #333; /* Fica um pouco mais claro no hover */
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilo para a imagem do logo 'G' do Google que você adicionou */
+a#btn-login img.google-logo {
+  width: 18px;
+  height: 18px;
+}
 
 /* Hero */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-        url('/assets/fundo-slogan.png') center/cover no-repeat;
-    padding: 120px 0;
-    text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("/assets/fundo-slogan.png") center / cover
+    no-repeat;
+  padding: 120px 0;
+  text-align: center;
 }
 
 .hero h2 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 .hero p {
-    font-size: 1.4rem;
-    margin-bottom: 30px;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+  font-size: 1.4rem;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 .hero .btn {
-    background-color: #e63946;
-    color: white;
-    padding: 14px 40px;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: background-color 0.3s;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+  background-color: #e63946;
+  color: white;
+  padding: 14px 40px;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 .hero .btn:hover {
-    background-color: #ffb703;
-    color: #0d0d0d;
+  background-color: #ffb703;
+  color: #0d0d0d;
+}
+
+/* Estilos para a Seção de Perfil do Cliente */
+.perfil-cliente {
+  padding: 80px 0;
+  text-align: center;
+  background-color: #1a1a1a; /* Um fundo um pouco diferente para destacar */
+}
+
+.perfil-cliente h2 {
+  margin-bottom: 40px;
+  color: #ffb703;
+  font-size: 2.5rem;
+}
+
+#info-pedido-container {
+  background-color: #0d0d0d;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: auto;
+  text-align: left;
+  border: 1px solid #333;
+}
+
+#info-pedido-container h3 {
+  color: #e63946;
+  margin-bottom: 15px;
+}
+
+#info-pedido-container p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+#info-pedido-container strong {
+  color: #ffb703;
+}
+
+.pedido-card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px; /* Espaçamento entre os cards de pedido */
+}
+
+.pedido-card:last-child {
+  margin-bottom: 0;
+}
+
+.pedido-card ul {
+  padding-left: 30px;
+  margin-top: 8px;
+}
+
+/* Opcional: Cores diferentes para cada status */
+.status-recebido {
+  color: #ffb703;
+  font-weight: bold;
+}
+.status-em-preparo {
+  color: #1e90ff;
+  font-weight: bold;
+}
+.status-saiu-para-entrega {
+  color: #28a745;
+  font-weight: bold;
+}
+.status-pronto-para-retirada {
+  color: #28a745;
+  font-weight: bold;
 }
 
 /* Estilos para os Botões de Categoria */
 .categorias-cardapio {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 10px 0;
-    display: flex; /* Adicionado para melhor alinhamento e quebra de linha */
-    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha em telas menores */
-    justify-content: center; /* Centraliza os botões no container */
-    gap: 10px; /* Espaçamento entre os botões */
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 10px 0;
+  display: flex; /* Adicionado para melhor alinhamento e quebra de linha */
+  flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha em telas menores */
+  justify-content: center; /* Centraliza os botões no container */
+  gap: 10px; /* Espaçamento entre os botões */
 }
 
 .btn-categoria {
-    background-color: #333; /* Cor de fundo padrão */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    /* margin: 5px; Removido para usar gap */
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 0.9rem; /* Ajuste opcional do tamanho da fonte */
-    transition: background-color 0.3s, color 0.3s, transform 0.2s;
-    text-transform: capitalize; /* Para que 'hotdog' no data-filter vire 'Hotdog' no botão se o texto do botão for igual ao data-filter */
+  background-color: #333; /* Cor de fundo padrão */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  /* margin: 5px; Removido para usar gap */
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem; /* Ajuste opcional do tamanho da fonte */
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  text-transform: capitalize; /* Para que 'hotdog' no data-filter vire 'Hotdog' no botão se o texto do botão for igual ao data-filter */
 }
 
 .btn-categoria:hover {
-    background-color: #ffb703; /* Cor do hover da navegação */
-    color: #1a1a1a; /* Cor do texto no hover */
-    transform: translateY(-2px); /* Efeito de leve elevação */
+  background-color: #ffb703; /* Cor do hover da navegação */
+  color: #1a1a1a; /* Cor do texto no hover */
+  transform: translateY(-2px); /* Efeito de leve elevação */
 }
 
 .btn-categoria.active {
-    background-color: #e63946; /* Cor de destaque, como nos botões "Ver Cardápio" e "Adicionar ao Carrinho" */
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(230, 57, 70, 0.5); /* Sombra suave para o botão ativo */
+  background-color: #e63946; /* Cor de destaque, como nos botões "Ver Cardápio" e "Adicionar ao Carrinho" */
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(230, 57, 70, 0.5); /* Sombra suave para o botão ativo */
 }
 
 /* Cardápio */
-.cardapio, .contato {
-    padding: 100px 0;
-    text-align: center;
+.cardapio,
+.contato {
+  padding: 100px 0;
+  text-align: center;
 }
 
-.cardapio h2, .contato h2 {
-    margin-bottom: 50px;
-    color: #ffb703;
-    font-size: 2.8rem;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+.cardapio h2,
+.contato h2 {
+  margin-bottom: 50px;
+  color: #ffb703;
+  font-size: 2.8rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 .itens-cardapio {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .itens-cardapio .item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
 }
 
 .item {
-    border: 1px solid #333;
-    padding: 30px;
-    border-radius: 20px;
-    width: 300px;
-    background-color: #1a1a1a;
-    transition: transform 0.4s, box-shadow 0.4s;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+  border: 1px solid #333;
+  padding: 30px;
+  border-radius: 20px;
+  width: 300px;
+  background-color: #1a1a1a;
+  transition: transform 0.4s, box-shadow 0.4s;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 .item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(255, 183, 3, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(255, 183, 3, 0.3);
 }
 
 .item h3 {
-    margin-bottom: 15px;
-    color: #f1faee;
+  margin-bottom: 15px;
+  color: #f1faee;
 }
 
 .descricao-lanche {
-    font-size: 1rem;
-    color: #ccc;
+  font-size: 1rem;
+  color: #ccc;
 }
 
 .item span {
-    display: block;
-    margin-top: 20px;
-    font-weight: bold;
-    color: #e63946;
-    font-size: 1.3rem;
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #e63946;
+  font-size: 1.3rem;
 }
 
 /* Estilo para o aviso "Imagens meramente ilustrativas" */
 .aviso-ilustrativo {
-    font-size: 0.7rem; /* Tamanho da fonte bem pequeno */
-    color: #aaa;       /* Uma cor cinza clara, sutil */
-    text-align: center; /* Centraliza o texto abaixo da imagem */
-    margin-top: 4px;    /* Pequeno espaço entre a imagem e o aviso */
-    margin-bottom: 8px; /* Espaço entre o aviso e o título do item */
-    font-style: italic; /* Deixa o texto em itálico, comum para disclaimers */
-    line-height: 1.2;   /* Ajusta o espaçamento entre linhas se o texto quebrar */
+  font-size: 0.7rem; /* Tamanho da fonte bem pequeno */
+  color: #aaa; /* Uma cor cinza clara, sutil */
+  text-align: center; /* Centraliza o texto abaixo da imagem */
+  margin-top: 4px; /* Pequeno espaço entre a imagem e o aviso */
+  margin-bottom: 8px; /* Espaço entre o aviso e o título do item */
+  font-style: italic; /* Deixa o texto em itálico, comum para disclaimers */
+  line-height: 1.2; /* Ajusta o espaçamento entre linhas se o texto quebrar */
 }
 
 /* Carrinho */
 .item button {
-    background-color: #e63946;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 10px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
-    display: block;
-    width: 100%;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  display: block;
+  width: 100%;
 }
 
 .item button:hover {
-    background-color: #ffb703;
-    color: #1a1a1a;
-    transform: scale(1.05);
+  background-color: #ffb703;
+  color: #1a1a1a;
+  transform: scale(1.05);
 }
 
 .item button:active {
-    transform: scale(0.98);
+  transform: scale(0.98);
 }
-
 
 /* Estilos para o Novo Carrinho Flutuante */
 .carrinho-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000; /* Para ficar sobre outros elementos */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Para ficar sobre outros elementos */
 }
 
 .carrinho-icone {
-    background-color: #e63946; /* Cor de destaque do seu site */
-    color: white;
-    width: 60px;  /* Tamanho do círculo do ícone */
-    height: 60px; /* Tamanho do círculo do ícone */
-    border-radius: 50%; /* Para fazer o fundo circular */
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative; /* Necessário para posicionar o contador */
-    transition: transform 0.2s ease;
+  background-color: #e63946; /* Cor de destaque do seu site */
+  color: white;
+  width: 60px; /* Tamanho do círculo do ícone */
+  height: 60px; /* Tamanho do círculo do ícone */
+  border-radius: 50%; /* Para fazer o fundo circular */
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Necessário para posicionar o contador */
+  transition: transform 0.2s ease;
 }
 
 .carrinho-icone:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .carrinho-icone .icone-figura {
-    font-size: 28px; /* Tamanho do emoji/ícone do carrinho */
+  font-size: 28px; /* Tamanho do emoji/ícone do carrinho */
 }
 
 .contador-itens {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #ffb703; /* Cor de destaque para o contador */
-    color: #1a1a1a; /* Cor do texto do contador */
-    border-radius: 50%;
-    padding: 4px 8px; /* Ajuste para o número de itens */
-    font-size: 13px;
-    font-weight: bold;
-    border: 2px solid white; /* Borda para destacar */
-    min-width: 15px; /* Largura mínima para manter a forma circular com 1 dígito */
-    text-align: center;
-    display: none; /* Começa escondido, aparece com JS se houver itens */
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ffb703; /* Cor de destaque para o contador */
+  color: #1a1a1a; /* Cor do texto do contador */
+  border-radius: 50%;
+  padding: 4px 8px; /* Ajuste para o número de itens */
+  font-size: 13px;
+  font-weight: bold;
+  border: 2px solid white; /* Borda para destacar */
+  min-width: 15px; /* Largura mínima para manter a forma circular com 1 dígito */
+  text-align: center;
+  display: none; /* Começa escondido, aparece com JS se houver itens */
+}
+
+/* Animação de shake para o carrinho */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.carrinho-icone.shake {
+  animation: shake 0.5s ease-in-out;
 }
 
 .carrinho-detalhes {
-    display: none; /* Começa escondido */
-    position: absolute;
-    bottom: 75px; /* Distância acima do ícone flutuante */
-    right: 0;
-    width: 300px; /* Largura do painel do carrinho */
-    background-color: #1a1a1a;
-    color: white;
-    padding: 0; /* Removido padding para controle interno */
-    border-radius: 12px;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-    max-height: 75vh; /* Altura máxima */
-    /* overflow-y: auto; Movido para um container interno se necessário para o padding */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  display: none; /* Começa escondido */
+  position: absolute;
+  bottom: 75px; /* Distância acima do ícone flutuante */
+  right: 0;
+  width: 350px; /* Largura aumentada para acomodar controles */
+  background-color: #1a1a1a;
+  color: white;
+  padding: 0; /* Removido padding para controle interno */
+  border-radius: 12px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+  max-height: 75vh; /* Altura máxima */
+  /* overflow-y: auto; Movido para um container interno se necessário para o padding */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
 }
 
 .carrinho-detalhes.aberto {
-    display: flex; /* Usar flex para organizar o conteúdo interno */
-    flex-direction: column;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  display: flex; /* Usar flex para organizar o conteúdo interno */
+  flex-direction: column;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .carrinho-detalhes .carrinho-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #333;
 }
 
 .carrinho-detalhes h2 {
-    margin: 0; /* Reset margin */
-    font-size: 1.4rem;
-    color: #ffb703;
+  margin: 0; /* Reset margin */
+  font-size: 1.4rem;
+  color: #ffb703;
 }
 
 .btn-fechar-carrinho {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px; /* Tamanho do 'X' */
-    cursor: pointer;
-    padding: 0 5px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px; /* Tamanho do 'X' */
+  cursor: pointer;
+  padding: 0 5px;
 }
 
 .btn-fechar-carrinho:hover {
-    color: #ffb703;
+  color: #ffb703;
 }
 
 .carrinho-detalhes ul#itens-carrinho {
-    list-style: none;
-    padding: 10px 20px;
-    margin: 0;
-    overflow-y: auto; /* Scroll para a lista de itens */
-    flex-grow: 1; /* Faz a lista ocupar o espaço disponível */
+  list-style: none;
+  padding: 10px 20px;
+  margin: 0;
+  overflow-y: auto; /* Scroll para a lista de itens */
+  flex-grow: 1; /* Faz a lista ocupar o espaço disponível */
 }
 
 .carrinho-detalhes li {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px dotted #444;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #0d0d0d;
 }
+
 .carrinho-detalhes li:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
-.carrinho-detalhes li span { /* Para o texto do item */
-    flex-grow: 1; /* Ocupa espaço, empurrando o botão para a direita */
-    margin-right: 10px;
+.item-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.carrinho-detalhes li button { /* Botão de remover item */
-    background: none;
-    border: none;
-    color: #ff4c4c;
-    cursor: pointer;
-    font-size: 1.1rem; /* Tamanho do ícone da lixeira */
-    padding: 0;
-    flex-shrink: 0; /* Para não encolher */
+.item-name {
+  font-weight: bold;
+  color: #f1faee;
+  font-size: 0.9rem;
+}
+
+.item-price {
+  color: #e63946;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+  background-color: #555;
+}
+
+.quantity-btn.plus {
+  background-color: #e63946;
+}
+
+.quantity-btn.plus:hover {
+  background-color: #d63384;
+}
+
+.quantity-display {
+  background-color: #333;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: #ff4c4c;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.remove-item-btn:hover {
+  color: #ff1c1c;
 }
 
 .carrinho-detalhes p#total-carrinho {
-    padding: 15px 20px;
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: right;
-    border-top: 1px solid #333;
+  padding: 15px 20px;
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: right;
+  border-top: 1px solid #333;
 }
 
-.btn-finalizar-pedido-carrinho { /* Botão Finalizar Pedido dentro do carrinho */
-    background-color: #e63946;
-    color: white;
-    padding: 12px 20px;
-    width: calc(100% - 40px); /* Desconta o padding lateral */
-    border: none;
-    border-radius: 0 0 8px 8px; /* Arredonda cantos inferiores se colado no fundo */
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    margin: 0 20px 20px 20px; /* Espaçamento consistente */
-    transition: background-color 0.3s;
+.btn-finalizar-pedido-carrinho {
+  /* Botão Finalizar Pedido dentro do carrinho */
+  background-color: #e63946;
+  color: white;
+  padding: 12px 20px;
+  width: calc(100% - 40px); /* Desconta o padding lateral */
+  border: none;
+  border-radius: 0 0 8px 8px; /* Arredonda cantos inferiores se colado no fundo */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0 20px 20px 20px; /* Espaçamento consistente */
+  transition: background-color 0.3s;
 }
 
 .btn-finalizar-pedido-carrinho:hover {
-    background-color: #ffb703;
-    color: #1a1a1a;
+  background-color: #ffb703;
+  color: #1a1a1a;
 }
 
 .carrinho h2 {
-    margin-bottom: 10px;
-    color: #ffb703;
+  margin-bottom: 10px;
+  color: #ffb703;
 }
 
 .carrinho ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .carrinho li {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .carrinho button {
-    margin-top: 10px;
-    background-color: #e63946;
-    color: white;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  margin-top: 10px;
+  background-color: #e63946;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .carrinho button:hover {
-    background-color: #ffb703;
-    color: #1a1a1a;
+  background-color: #ffb703;
+  color: #1a1a1a;
+}
+
+/* Notificação de Item Adicionado ao Carrinho */
+.cart-notification {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 1001;
+  background-color: #28a745;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  min-width: 280px;
+}
+
+.cart-notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-icon {
+  background-color: #20c997;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.notification-text {
+  flex: 1;
+}
+
+.notification-title {
+  font-weight: bold;
+  margin: 0;
+  font-size: 14px;
+}
+
+.notification-item {
+  margin: 0;
+  font-size: 12px;
+  color: #e8f5e8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.notification-cart-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* Popup de Confirmação de Pedido */
+.order-confirmation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.popup-content {
+  position: relative;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 450px;
+  width: 100%;
+  color: #333;
+  animation: popupSlideIn 0.3s ease-out;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.popup-header {
+  text-align: center;
+  padding: 30px 30px 20px;
+}
+
+.success-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.popup-header h2 {
+  color: #333;
+  font-size: 24px;
+  margin: 0;
+}
+
+.popup-body {
+  padding: 0 30px 20px;
+  text-align: center;
+}
+
+.popup-body p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.order-id-container {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.order-id-label {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 5px 0;
+}
+
+.order-id {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  font-size: 16px;
+}
+
+.info-box {
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 15px;
+  color: #856404;
+  font-size: 14px;
+}
+
+.info-box p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.popup-footer {
+  padding: 20px 30px 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn-secondary,
+.btn-primary {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-primary {
+  background-color: #e63946;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #d63384;
+}
+
+.popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+}
+
+.popup-close:hover {
+  color: #666;
 }
 
 /* Formulário */
 .formulario {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.8);
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
 
 .form-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    color: black;
-    max-height: 85vh; /* Define uma altura máxima (85% da altura da tela) */
-    overflow-y: auto;  /* Adiciona barra de rolagem vertical se o conteúdo ultrapassar a max-height */
-    display: flex;
-    flex-direction: column;
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  color: black;
+  max-height: 85vh; /* Define uma altura máxima (85% da altura da tela) */
+  overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo ultrapassar a max-height */
+  display: flex;
+  flex-direction: column;
 }
 
 .form-content h2 {
-    margin-bottom: 20px;
-    color: #e63946;
+  margin-bottom: 20px;
+  color: #e63946;
 }
 
 .form-content label {
-    display: block;
-    margin-bottom: 10px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.form-content input, .form-content textarea, .form-content select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+.form-content input,
+.form-content textarea,
+.form-content select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 .botoes-form {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .botoes-form button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .botoes-form button:first-child {
-    background-color: #e63946;
-    color: white;
+  background-color: #e63946;
+  color: white;
 }
 
 .botoes-form button:first-child:hover {
-    background-color: #ffb703;
-    color: #1a1a1a;
+  background-color: #ffb703;
+  color: #1a1a1a;
 }
 
 .botoes-form button:last-child {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 .botoes-form button:last-child:hover {
-    background-color: #999;
+  background-color: #999;
 }
 
 .taxa-entrega {
-    background-color: #ffeeba;
-    color: #333;
-    padding: 8px;
-    border-radius: 8px;
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: center;
+  background-color: #ffeeba;
+  color: #333;
+  padding: 8px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* Estilo para o container do checkbox "Lembrar Informações" */
 .lembrar-info-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .lembrar-info-container input[type="checkbox"] {
-    width: auto;
-    margin-top: 0;
-    cursor: pointer;
+  width: auto;
+  margin-top: 0;
+  cursor: pointer;
 }
 
 .lembrar-info-container label {
-    margin-bottom: 0;
-    font-size: 0.9rem;
-    color: #444; /* Ajuste a cor se necessário para o tema do formulário */
-    cursor: pointer;
-    font-weight: normal;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #444; /* Ajuste a cor se necessário para o tema do formulário */
+  cursor: pointer;
+  font-weight: normal;
 }
 
 /* Alerta Customizado para localStorage */
 #alerta-customizado-localStorage {
-    position: fixed;
-    bottom: 80px; /* Ajuste para não sobrepor o ícone do carrinho */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 25px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    z-index: 3001;
-    display: none; /* Começa escondido */
-    box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-    font-size: 0.9rem;
-    text-align: center;
-    opacity: 0; /* Para efeito de fade */
-    transition: opacity 0.3s ease-in-out;
+  position: fixed;
+  bottom: 80px; /* Ajuste para não sobrepor o ícone do carrinho */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  z-index: 3001;
+  display: none; /* Começa escondido */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  font-size: 0.9rem;
+  text-align: center;
+  opacity: 0; /* Para efeito de fade */
+  transition: opacity 0.3s ease-in-out;
 }
 
 #alerta-customizado-localStorage.show {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
 }
 
 #alerta-customizado-localStorage.success {
-    background-color: #28a745; /* Verde */
+  background-color: #28a745; /* Verde */
 }
 
 #alerta-customizado-localStorage.info {
-    background-color: #17a2b8; /* Azul */
+  background-color: #17a2b8; /* Azul */
 }
 
 /*Estilos para Opções de Tipo de Entrega */
 .tipo-entrega-container {
-    margin-bottom: 20px;
-    text-align: center; /* Centraliza o h3 */
+  margin-bottom: 20px;
+  text-align: center; /* Centraliza o h3 */
 }
 
 .tipo-entrega-container h3 {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #333; /* Cor do título dentro do form */
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333; /* Cor do título dentro do form */
 }
 
 .opcoes-tipo-entrega {
-    display: flex;
-    justify-content: space-around; /* Ou space-between/center */
-    gap: 15px;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around; /* Ou space-between/center */
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .opcao-entrega {
-    flex: 1;
-    padding: 15px 10px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    /*transition: border-color 0.3s, background-color 0.3s;*/
-    background-color: #f9f9f9;
+  flex: 1;
+  padding: 15px 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /*transition: border-color 0.3s, background-color 0.3s;*/
+  background-color: #f9f9f9;
 }
 
 .opcao-entrega:hover {
-    border-color: #ffb703; /* Cor de destaque no hover */
-    background-color: #fff8e7;
+  border-color: #ffb703; /* Cor de destaque no hover */
+  background-color: #fff8e7;
 }
 
 .opcao-entrega.selecionado {
-    border-color: #e63946; /* Cor de destaque quando selecionado */
-    background-color: #fce8e6;
-    font-weight: bold;
+  border-color: #e63946; /* Cor de destaque quando selecionado */
+  background-color: #fce8e6;
+  font-weight: bold;
 }
 
 .opcao-entrega img {
-    width: 50px; /* Ajuste o tamanho do ícone */
-    height: 50px;
-    margin-bottom: 5px;
+  width: 50px; /* Ajuste o tamanho do ícone */
+  height: 50px;
+  margin-bottom: 5px;
 }
 
 .opcao-entrega span {
-    font-size: 0.9rem;
-    color: #333;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 #observacoes {
-    min-height: 60px; /* Altura mínima para o campo de observações */
-    resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 60px; /* Altura mínima para o campo de observações */
+  resize: vertical; /* Permite redimensionar verticalmente */
 }
 
 #campo-troco label,
-#container-pagamento label[for='pagamento'] { /* Estilo para os labels */
-    font-weight: bold; /* Deixa o label um pouco mais destacado */
-    margin-bottom: 5px; /* Espaço abaixo do label */
-    display: block; /* Garante que o label fique acima do input */
+#container-pagamento label[for="pagamento"] {
+  /* Estilo para os labels */
+  font-weight: bold; /* Deixa o label um pouco mais destacado */
+  margin-bottom: 5px; /* Espaço abaixo do label */
+  display: block; /* Garante que o label fique acima do input */
 }
 
 /* Garante que o label do select de pagamento tenha margem */
-#container-pagamento label[for='pagamento'] {
-    margin-top: 10px; /* Espaço acima do seletor de pagamento */
+#container-pagamento label[for="pagamento"] {
+  margin-top: 10px; /* Espaço acima do seletor de pagamento */
 }
 
 /* --------------------------------------------- */
 
 /* Contato */
 .contato-info {
-    display: flex;
-    flex-wrap: wrap; /* Mantém a capacidade de quebrar linha em telas menores */
-    gap: 30px;       /* Espaçamento entre os blocos de horários e mapa */
-    justify-content: center; /* Centraliza o conjunto na página */
-    align-items: flex-start; /* ALTERADO de 'center' para 'flex-start' */
-    margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Mantém a capacidade de quebrar linha em telas menores */
+  gap: 30px; /* Espaçamento entre os blocos de horários e mapa */
+  justify-content: center; /* Centraliza o conjunto na página */
+  align-items: flex-start; /* ALTERADO de 'center' para 'flex-start' */
+  margin-top: 20px;
 }
 
 .horarios {
-    flex-grow: 1;       /* Cresce para ocupar o espaço disponível (1 parte) */
-    flex-shrink: 1;     /* Permite encolher se necessário */
-    flex-basis: 320px;  /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 35% ou 300px) */
-    min-width: 280px;   /* Largura mínima antes de quebrar a linha */
-    padding: 25px;      /* Leve ajuste no padding */
-    background-color: #1a1a1a; /* Cor de fundo para consistência com outros blocos escuros */
-    border: 2px solid red;
-    border-radius: 15px;  /* Raio da borda (removida a duplicação e ajustado) */
-    /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); Se quiser manter a sombra sem a borda vermelha */
-    /* border: 2px solid red; Considere remover para o design final */
-    color: #f1faee;     /* Garante que o texto dentro seja claro */
+  flex-grow: 1; /* Cresce para ocupar o espaço disponível (1 parte) */
+  flex-shrink: 1; /* Permite encolher se necessário */
+  flex-basis: 320px; /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 35% ou 300px) */
+  min-width: 280px; /* Largura mínima antes de quebrar a linha */
+  padding: 25px; /* Leve ajuste no padding */
+  background-color: #1a1a1a; /* Cor de fundo para consistência com outros blocos escuros */
+  border: 2px solid red;
+  border-radius: 15px; /* Raio da borda (removida a duplicação e ajustado) */
+  /* box-shadow: 0 2px 10px rgba(0,0,0,0.1); Se quiser manter a sombra sem a borda vermelha */
+  /* border: 2px solid red; Considere remover para o design final */
+  color: #f1faee; /* Garante que o texto dentro seja claro */
 }
 
-.horarios h3 { /* Mantém ou ajusta conforme o estilo existente */
-    margin-bottom: 15px;
-    color: #e63946;
+.horarios h3 {
+  /* Mantém ou ajusta conforme o estilo existente */
+  margin-bottom: 15px;
+  color: #e63946;
 }
 
-.horarios p { /* Mantém ou ajusta conforme o estilo existente */
-    margin: 8px 0;
-    color: white; /* ou #f1faee */
-    font-weight: 500;
+.horarios p {
+  /* Mantém ou ajusta conforme o estilo existente */
+  margin: 8px 0;
+  color: white; /* ou #f1faee */
+  font-weight: 500;
 }
 
 .mapa {
-    flex-grow: 2;       /* Cresce para ocupar mais espaço (2 partes) */
-    flex-shrink: 1;     /* Permite encolher */
-    flex-basis: 450px;  /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 55% ou 400px) */
-    min-width: 300px;   /* Largura mínima */
+  flex-grow: 2; /* Cresce para ocupar mais espaço (2 partes) */
+  flex-shrink: 1; /* Permite encolher */
+  flex-basis: 450px; /* TAMANHO BASE SUGERIDO - ajuste conforme necessário (ex: 55% ou 400px) */
+  min-width: 300px; /* Largura mínima */
 }
 
 .mapa iframe {
-    width: 100%;
-    height: 350px; /* Altura do mapa, pode ajustar se necessário */
-    border: none;
-    border-radius: 12px;
+  width: 100%;
+  height: 350px; /* Altura do mapa, pode ajustar se necessário */
+  border: none;
+  border-radius: 12px;
 }
 
 /* Estilos para o Contato do Instagram */
 .instagram-contato {
-    text-align: center; /* Centraliza o link do Instagram */
-    margin-top: 25px;   /* Espaçamento acima */
-    margin-bottom: 20px; /* Espaçamento abaixo, antes do contato-info */
+  text-align: center; /* Centraliza o link do Instagram */
+  margin-top: 25px; /* Espaçamento acima */
+  margin-bottom: 20px; /* Espaçamento abaixo, antes do contato-info */
 }
 
 .instagram-contato a {
-    color: #f1faee; /* Cor do texto, igual aos parágrafos */
-    text-decoration: none;
-    font-size: 1.1rem; /* Tamanho da fonte, ajuste conforme necessário */
-    display: inline-flex; /* Para alinhar o ícone e o texto na mesma linha */
-    align-items: center;  /* Alinha verticalmente o ícone e o texto */
-    gap: 8px; /* Espaço entre o ícone e o nome de usuário */
-    padding: 8px 15px; /* Espaçamento interno para parecer um pouco com um botão/link destacado */
-    border: 1px solid #ffb703; /* Borda com a cor de destaque (amarelo) */
-    border-radius: 25px; /* Bordas arredondadas */
-    transition: background-color 0.3s, color 0.3s;
+  color: #f1faee; /* Cor do texto, igual aos parágrafos */
+  text-decoration: none;
+  font-size: 1.1rem; /* Tamanho da fonte, ajuste conforme necessário */
+  display: inline-flex; /* Para alinhar o ícone e o texto na mesma linha */
+  align-items: center; /* Alinha verticalmente o ícone e o texto */
+  gap: 8px; /* Espaço entre o ícone e o nome de usuário */
+  padding: 8px 15px; /* Espaçamento interno para parecer um pouco com um botão/link destacado */
+  border: 1px solid #ffb703; /* Borda com a cor de destaque (amarelo) */
+  border-radius: 25px; /* Bordas arredondadas */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .instagram-contato a:hover {
-    background-color: #ffb703; /* Cor de fundo no hover (amarelo) */
-    color: #0d0d0d; /* Cor do texto no hover (preto) */
+  background-color: #ffb703; /* Cor de fundo no hover (amarelo) */
+  color: #0d0d0d; /* Cor do texto no hover (preto) */
 }
 
 .icone-social {
-    width: 24px;  /* Largura do ícone */
-    height: 24px; /* Altura do ícone */
-    /* vertical-align: middle; não é necessário com display: inline-flex e align-items: center */
+  width: 24px; /* Largura do ícone */
+  height: 24px; /* Altura do ícone */
+  /* vertical-align: middle; não é necessário com display: inline-flex e align-items: center */
 }
 
 /* Footer */
 footer {
-    background-color: #1a1a1a;
-    color: #888;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
+  background-color: #1a1a1a;
+  color: #888;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
 }
 
 /* Animação Scroll */
 .show {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 /* Mantém os estilos anteriores */
 /* Incluindo abaixo os novos */
 
 .galeria {
-    padding: 100px 0;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    text-align: center;
+  padding: 100px 0;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
 }
 
 .galeria h2 {
-    margin-bottom: 50px;
-    color: #ffb703;
-    font-size: 2.8rem;
-    opacity: 0;
-    transform: translateY(50px);
-    transition: 1s;
+  margin-bottom: 50px;
+  color: #ffb703;
+  font-size: 2.8rem;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: 1s;
 }
 
 /* Carousel */
 .carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    scroll-behavior: smooth;
-    padding-bottom: 10px;
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
 }
 
 .slide {
-    min-width: 300px;
-    border-radius: 15px;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    transition: transform 0.3s;
+  min-width: 300px;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
 }
 
 .slide img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .slide:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
+
+footer .admin-link {
+  color: #ffb703;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 10px;
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+footer .admin-link:hover {
+  color: #e63946;
+  text-decoration: underline;
+}
+
+footer {
+    background-color: #1a1a1a;
+    color: #888;
+    text-align: center;
+    padding: 20px 0 30px 0; /* Aumentado o padding inferior */
+    margin-top: 40px;
+    border-top: 1px solid #333;
+}
+
+footer .copyright {
+    font-size: 0.8rem;
+    margin-bottom: 20px; /* Espaço entre o copyright e sua assinatura */
+}
+
+.developed-by a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #f1faee;
+    font-size: 0.9rem;
+}
+
+.developed-by a:hover {
+    color: #fff;
+}
+
+.developed-by img {
+    height: 40px; /* Ajuste o tamanho da sua logo */
+    width: auto;
+    transition: filter 0.3s;
+}
+
+.developed-by a:hover img {
+    filter: grayscale(0) brightness(1); /* Deixa a logo colorida no hover */
+}
+
+.developed-by strong {
+    font-weight: 600;
+}
+
 
 /* Modal */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    background-color: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-    background-color: #1a1a1a;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
-    color: white;
-    text-align: center;
-    position: relative;
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+  text-align: center;
+  position: relative;
 }
 
 .modal-content h3 {
-    color: #ffb703;
-    margin-bottom: 15px;
+  color: #ffb703;
+  margin-bottom: 15px;
 }
 
 .modal-content p {
-    color: #ccc;
+  color: #ccc;
 }
 
 .modal-content span {
-    display: block;
-    margin-top: 20px;
-    font-size: 1.3rem;
-    color: #e63946;
+  display: block;
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: #e63946;
 }
 
 .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
-    cursor: pointer;
-    color: white;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
 }
 
 .close:hover {
-    color: #ffb703;
+  color: #ffb703;
 }
-
 
 @media (max-width: 600px) {
-    .slide img {
-        width: 180px;
-        height: 120px;
-    }
+  .slide img {
+    width: 180px;
+    height: 120px;
+  }
+
+  header .logo h1 {
+    font-size: 2rem;
+  }
 }
 
+@media (max-width: 360px) {
+  header .logo h1 {
+    font-size: 1.8rem;
+  }
+}
 
 /* Mensagem customizada para loja fechada */
 #mensagem-loja-fechada {
-    background-color: #e63946; /* Vermelho para alerta */
-    color: white;
-    padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    position: fixed; /* Fica fixo no topo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 3000; /* Para ficar sobre todos os outros elementos */
-    display: none; /* Começa escondido */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  background-color: #e63946; /* Vermelho para alerta */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-weight: bold;
+  position: fixed; /* Fica fixo no topo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 3000; /* Para ficar sobre todos os outros elementos */
+  display: none; /* Começa escondido */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Estilo para o ícone do carrinho quando desabilitado */
 .carrinho-icone.desabilitado {
-    background-color: #777; /* Cinza para indicar desabilitado */
-    opacity: 0.6;
-    cursor: not-allowed;
-    /* pointer-events: none; // Remove a capacidade de clique completamente */
+  background-color: #777; /* Cinza para indicar desabilitado */
+  opacity: 0.6;
+  cursor: not-allowed;
+  /* pointer-events: none; // Remove a capacidade de clique completamente */
 }
 
 /* Estilo geral para botões desabilitados (se quiser ser mais explícito que o padrão do navegador) */
 .item button:disabled,
 .btn-finalizar-pedido-carrinho:disabled {
-    background-color: #cccccc !important; /* Cinza claro */
-    color: #666666 !important;
-    cursor: not-allowed !important;
-    border: 1px solid #bbbbbb !important;
-    opacity: 0.7 !important;
+  background-color: #cccccc !important; /* Cinza claro */
+  color: #666666 !important;
+  cursor: not-allowed !important;
+  border: 1px solid #bbbbbb !important;
+  opacity: 0.7 !important;
 }

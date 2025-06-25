@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Painel Admin - GordoBurger</title>
+        <link rel="stylesheet" href="/styles/admin.css"> 
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="login-container" class="container">
+            <h1>Painel Administrativo</h1>
+            <div class="login-box">
+                <h2>Login do Administrador</h2>
+                <input type="email" id="admin-email" placeholder="Seu e-mail">
+                <input type="password" id="admin-senha" placeholder="Sua senha">
+                <button id="btn-admin-login">
+                    <span class="btn-text">Entrar</span>
+                    <div class="spinner" style="display: none;"></div>
+                </button>
+                <p id="login-error-message" class="error-message"></p>
+            </div>
+        </div>
+
+        <div id="admin-panel" class="container" style="display: none;">
+            <header class="admin-header">
+                <h1>Pedidos GordoBurguer</h1>
+                <button id="btn-admin-logout">Sair</button>
+            </header>
+
+            <div class="filtros-status-container">
+                <button class="btn-filtro-status active" data-status="todos">Todos Ativos</button>
+                <button class="btn-filtro-status" data-status="Recebido">Recebidos</button>
+                <button class="btn-filtro-status" data-status="Em Preparo">Em Preparo</button>
+                <button class="btn-filtro-status" data-status="Pronto para Retirada">Pronto p/ Retirada</button>
+                <button class="btn-filtro-status" data-status="Saiu para Entrega">Saiu p/ Entrega</button>
+                <button class="btn-filtro-status" data-status="Concluído">Concluídos</button>
+            </div>
+
+            <main id="pedidos-container">
+                <p>Aguardando novos pedidos...</p>
+            </main>
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        
+        <script src="/scripts/admin.js"></script> 
+
+        <audio id="admin-notification-sound" preload="auto">
+            <source src="/assets/notification-sound.mp3" type="audio/mpeg">
+        </audio>
+    </body>
+</html>

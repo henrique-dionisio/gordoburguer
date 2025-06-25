@@ -1,0 +1,351 @@
+/* Em /styles/admin.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Tela de Login */
+.login-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #1a1a1a;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Garante que padding não afete a largura total */
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-box button:hover {
+    background-color: #d62828;
+}
+
+.error-message {
+    color: #e63946;
+    margin-top: 10px;
+    font-weight: bold;
+    min-height: 1.2em;
+}
+
+
+/* Painel Principal (após login) */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.admin-header button {
+    padding: 8px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin-header button:hover {
+    background-color: #555;
+}
+
+
+.pedido-card .status-atual .status-texto {
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background-color: #ffb703; /* Amarelo padrão */
+    color: #1a1a1a;
+}
+
+/* Esconde pedidos concluídos para limpar a tela (opcional) */
+.pedido-card.status-concluído {
+    opacity: 0.5;
+    /* ou display: none; se quiser que suma completamente */
+}
+
+
+/* Estilos para os Botões de Filtro de Status */
+.filtros-status-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px; /* Espaço antes da lista de pedidos */
+}
+
+.btn-filtro-status {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    background-color: #f0f2f5;
+    color: #333;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-filtro-status:hover {
+    background-color: #e0e0e0;
+    border-color: #aaa;
+}
+
+.btn-filtro-status.active {
+    background-color: #e63946; /* Cor de destaque */
+    color: white;
+    border-color: #e63946;
+}
+
+
+
+/* Estilo para o seletor de status */
+.status-select-container {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-select-container label {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-select {
+    flex-grow: 1; /* Faz o select ocupar o espaço disponível */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-atualizar-status {
+    padding: 8px 12px;
+    background-color: #007bff; /* Azul para ação de salvar/atualizar */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-atualizar-status:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Card de pedidos */
+#pedidos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px; 
+}
+
+.pedido-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* DIMINUÍDO: Este é o espaçamento entre os elementos dentro do card (Título, Status, Itens, Total). Diminua para 5px ou 8px. */
+}
+
+
+.pedido-card p {
+    margin: 4px 0; /* Adiciona uma pequena margem vertical em todos os parágrafos */
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.pedido-card h3 {
+    margin: 0 0 15px 0; /* Espaço maior abaixo do título do pedido */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.pedido-card h4 {
+    margin: 15px 0 5px 0; /* Espaço maior acima dos títulos de seção como "Itens:" */
+    color: #1a1a1a;
+    font-size: 0.9rem;
+}
+
+.pedido-card hr {
+    margin: 15px 0; /* Espaço em volta das linhas de separação */
+}
+
+.status-select-container {
+    margin-top: 20px; /* Espaço maior antes da seção de mudança de status */
+}
+
+
+/* Opcional, mas recomendado: ajustar as margens de elementos específicos
+   para ter ainda mais controle do que a propriedade 'gap' */
+.pedido-card h3 {
+    margin-bottom: 10px; /* Espaço abaixo do Título do Pedido */
+}
+
+.pedido-card ul {
+    margin-top: 1px; /* Espaço entre o título "Itens:" e a lista */
+}
+
+.pedido-card li {
+    padding: 2px 0; /* Espaçamento vertical entre os itens do pedido */
+}
+
+.pedido-card hr {
+    margin: 10px 0; /* Aumenta o espaço em volta das linhas de separação */
+}
+
+.status-select-container {
+    margin-top: 20px; /* Aumenta o espaço antes da seção de mudança de status */
+}
+
+
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 3px solid #fff;
+    width: 18px;
+    height: 18px;
+    animation: spin 1s linear infinite;
+    margin: auto; /* Centraliza o spinner quando o texto está oculto */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ajuste no botão de login para acomodar o spinner */
+#btn-admin-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para o cabeçalho do card de pedido */
+.pedido-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.pedido-card-header h3 {
+    margin: 0; /* Remove a margem que estava no h3 antes */
+}
+
+/* Estilo do botão de imprimir */
+.btn-imprimir {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 3px; /* Cria uma área de clique maior em volta do ícone */
+    border-radius: 100%; /* Mantém o fundo circular no hover */
+    display: flex; /* Para centralizar a imagem dentro do botão */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+/* Estilo para a imagem do ícone dentro do botão */
+.btn-imprimir img {
+    width: 50px;  /* Ajuste o tamanho do ícone conforme necessário */
+    height: 50px;
+}
+
+.btn-imprimir:hover {
+    background-color: #e9e9e9; /* Um cinza claro para o feedback de hover */
+}
+
+
+/* --- Estilos Específicos para a Impressão (VERSÃO CORRIGIDA) --- */
+@media print {
+    /* 1. Esconde a visibilidade de TUDO na página por padrão */
+    body * {
+        visibility: hidden;
+    }
+
+    /* 2. Torna visível APENAS a área que queremos imprimir e seus conteúdos */
+    .printable-area, .printable-area * {
+        visibility: visible;
+    }
+
+    /* 3. Posiciona a área de impressão para ocupar a página corretamente */
+    .printable-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 15px; /* Adiciona uma pequena margem de impressão */
+        border: none;
+        box-shadow: none;
+    }
+    
+    /* 4. Esconde novamente elementos que não queremos dentro do card impresso */
+    .printable-area .btn-imprimir,
+    .printable-area .status-select-container {
+        display: none; /* Usar display: none aqui funciona bem para esses elementos internos */
+    }
+
+    /* 5. (Opcional) Força cores e fundo para economizar tinta e melhorar leitura */
+    .printable-area {
+        color: #000 !important;
+        background: #fff !important;
+    }
+    
+    .printable-area h3, .printable-area .status-texto {
+        color: #000 !important;
+        background: none !important; /* Remove o fundo amarelo do status */
+    }
+}
