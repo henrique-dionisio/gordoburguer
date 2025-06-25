@@ -69,16 +69,7 @@ function fazerLogoutAdmin() {
 }
 
 
-// --- LÓGICA DO PAINEL DE PEDIDOS ---
-let pedidosConhecidos = new Set(); // Guarda os IDs dos pedidos já vistos
-
-function tocarSomNovoPedido() {
-    const som = document.getElementById('admin-notification-sound');
-    if (som) {
-        som.currentTime = 0; // Reinicia o som se já estiver tocando
-        som.play().catch(error => console.log("Erro ao tocar som:", error));
-    }
-}
+// --- LÓGICA DO PAINEL DE PEDIDOS --
 
 let filtroStatusAtual = 'todos'; // Começa mostrando 'Todos Ativos'
 
@@ -105,7 +96,8 @@ function carregarPedidos() {
     if (!pedidosContainer) return;
 
     let query = db.collection("pedidos");
-    // ... (o resto da sua lógica de filtro continua igual)
+
+    // Lógica de filtro (continua igual)
     if (filtroStatusAtual === 'todos') {
         query = query.where("status", "in", ["Recebido", "Em Preparo", "Pronto para Retirada", "Saiu para Entrega"]);
     } else {
@@ -114,42 +106,32 @@ function carregarPedidos() {
 
     query.orderBy("timestamp", "desc")
       .onSnapshot((querySnapshot) => {
-          // Lógica de detecção de novos pedidos
-          let primeiroCarregamento = pedidosConhecidos.size === 0;
 
-          querySnapshot.docChanges().forEach(change => {
-              if (change.type === 'added' && !primeiroCarregamento) {
-                  // Se um novo pedido foi adicionado E não é a primeira vez que carregamos a lista
-                  tocarSomNovoPedido();
-              }
-          });
-
-          // Atualiza a lista de pedidos conhecidos após o primeiro carregamento
-          if (primeiroCarregamento) {
-              querySnapshot.forEach(doc => pedidosConhecidos.add(doc.id));
-          }
           if (querySnapshot.empty) {
               pedidosContainer.innerHTML = `<p>Nenhum pedido encontrado com o status "${filtroStatusAtual}".</p>`;
               return;
           }
 
-          pedidosContainer.innerHTML = ""; // Limpa o container
+          pedidosContainer.innerHTML = ""; // Limpa o container para redesenhar
 
           querySnapshot.forEach(doc => {
-              const pedido = doc.data();
               const pedidoId = doc.id;
 
-              // O restante do código para criar o 'pedidoCard' continua o mesmo...
+              const pedido = doc.data();
               const pedidoCard = document.createElement('div');
+              
+              // O restante do seu código para criar o pedidoCard continua exatamente igual...
               pedidoCard.className = `pedido-card status-${pedido.status.toLowerCase().replace(/ /g, '-')}`;
               pedidoCard.dataset.id = pedidoId;
               const dataPedido = pedido.timestamp ? pedido.timestamp.toDate().toLocaleString('pt-BR') : 'Data indisponível';
 
               pedidoCard.innerHTML = `
-                  <h3>Pedido #${pedidoId.substring(0, 6)}...</h3>
-                  <button class="btn-imprimir" title="Imprimir Pedido">
-                    <img src="/assets/icon-printer.webp" alt="Imprimir Pedido">
-                  </button>
+                  <div class="pedido-card-header">
+                      <h3>Pedido #${pedidoId.substring(0, 6)}...</h3>
+                      <button class="btn-imprimir" title="Imprimir Pedido">
+                          <img src="/assets/icon-printer.webp" alt="Imprimir Pedido">
+                      </button>
+                  </div>
                   <p><strong>Cliente:</strong> ${pedido.userName || 'Não informado'}</p>
                   <p><strong>Data:</strong> ${dataPedido}</p>
                   <p class="status-atual"><strong>Status Atual:</strong> <span class="status-texto">${pedido.status}</span></p>
@@ -164,8 +146,7 @@ function carregarPedidos() {
                   <p><strong>Total do Pedido:</strong> R$ ${pedido.total.toFixed(2).replace('.', ',')}</p>
                   
                   ${pedido.tipoEntrega === 'entrega' ? `
-                      <hr>
-                      <h4>Endereço de Entrega:</h4>
+                      <hr><h4>Endereço de Entrega:</h4>
                       <p>${pedido.endereco.rua}, Nº ${pedido.endereco.numero}, ${pedido.endereco.bairro}</p>
                       <p>CEP: ${pedido.endereco.cep}</p>
                       ${pedido.endereco.complemento ? `<p>Comp: ${pedido.endereco.complemento}</p>` : ''}
@@ -186,7 +167,6 @@ function carregarPedidos() {
                       <button class="btn-atualizar-status" data-id="${pedidoId}">Atualizar</button>
                   </div>
               `;
-              
               pedidosContainer.appendChild(pedidoCard);
           });
       }, (error) => {
