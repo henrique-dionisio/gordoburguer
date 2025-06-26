@@ -40,11 +40,11 @@ let unsubscribeMonitorStatus = () => {}; // Função vazia para desligar o liste
 
 const horariosFuncionamento = {
     0: { nomeDia: "Domingo", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } },
-    1: { nomeDia: "Segunda-feira", abre: { h: 11, m: 30 }, fecha: { h: 22, m: 0 } },
-    2: { nomeDia: "Terça-feira", abre: { h: 11, m: 30 }, fecha: { h: 22, m: 0 } },
-    3: { nomeDia: "Quarta-feira", abre: { h: 11, m: 30 }, fecha: { h: 22, m: 0 } },
-    4: { nomeDia: "Quinta-feira", abre: { h: 11, m: 30 }, fecha: { h: 22, m: 0 } },
-    5: { nomeDia: "Sexta-feira", abre: { h: 11, m: 30 }, fecha: { h: 22, m: 0 } },
+    1: { nomeDia: "Segunda-feira", abre: { h: 10, m: 30 }, fecha: { h: 22, m: 0 } },
+    2: { nomeDia: "Terça-feira", abre: { h: 10, m: 30 }, fecha: { h: 22, m: 0 } },
+    3: { nomeDia: "Quarta-feira", abre: { h: 10, m: 30 }, fecha: { h: 22, m: 0 } },
+    4: { nomeDia: "Quinta-feira", abre: { h: 10, m: 30 }, fecha: { h: 22, m: 0 } },
+    5: { nomeDia: "Sexta-feira", abre: { h: 10, m: 30 }, fecha: { h: 22, m: 0 } },
     6: { nomeDia: "Sábado", abre: { h: 10, m: 0 }, fecha: { h: 22, m: 0 } },
 };
 
@@ -286,10 +286,10 @@ function apagarInformacoesCliente() { localStorage.removeItem(LOCAL_STORAGE_KEY_
 
 function enviarPedido() {
     const user = auth.currentUser; if (!user) { alert("Por favor, faça o login para finalizar seu pedido!"); return; }
-    const nome = document.getElementById("nome").value, observacoes = document.getElementById("observacoes").value, formaPagamento = document.getElementById("pagamento").value, trocoInput = document.getElementById("troco_para").value;
+    const nome = document.getElementById("nome").value, telefone = document.getElementById("telefone").value, observacoes = document.getElementById("observacoes").value, formaPagamento = document.getElementById("pagamento").value, trocoInput = document.getElementById("troco_para").value;
     if (!nome || !tipoEntregaSelecionado || !formaPagamento) { alert("Preencha todos os campos obrigatórios."); return; } if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); return; }
     const subtotal = carrinho.reduce((acc, i) => acc + i.preco * i.quantidade, 0); const total = subtotal + taxaEntregaAtual;
-    const pedido = { userId: user.uid, userName: nome, userEmail: user.email, itens: carrinho, subtotal, taxaEntrega: taxaEntregaAtual, total, tipoEntrega: tipoEntregaSelecionado, formaPagamento, observacoes: observacoes || "Nenhuma", timestamp: firebase.firestore.FieldValue.serverTimestamp(), status: "Recebido" };
+    const pedido = { userId: user.uid, userName: nome, userTelefone: telefone, userEmail: user.email, itens: carrinho, subtotal, taxaEntrega: taxaEntregaAtual, total, tipoEntrega: tipoEntregaSelecionado, formaPagamento, observacoes: observacoes || "Nenhuma", timestamp: firebase.firestore.FieldValue.serverTimestamp(), status: "Recebido" };
     if (tipoEntregaSelecionado === "entrega") {
         const end = { rua: document.getElementById("rua").value, numero: document.getElementById("numero").value, complemento: document.getElementById("complemento").value, bairro: document.getElementById("bairro").value, cep: document.getElementById("cep").value };
         if (!end.rua || !end.numero || !end.bairro || !end.cep) { alert("Para entrega, preencha o endereço completo."); return; }

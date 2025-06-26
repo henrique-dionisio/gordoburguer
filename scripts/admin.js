@@ -133,17 +133,19 @@ function carregarPedidos() {
                       </button>
                   </div>
                   <p><strong>Cliente:</strong> ${pedido.userName || 'Não informado'}</p>
-                  <p><strong>Data:</strong> ${dataPedido}</p>
+                  <p><strong>WhatsApp:</strong> ${pedido.userTelefone || 'Não informado'}<p><strong>Data:</strong> ${dataPedido}</p>
                   <p class="status-atual"><strong>Status Atual:</strong> <span class="status-texto">${pedido.status}</span></p>
                   <hr>
                   <h4>Itens:</h4>
                   <ul>
                       ${pedido.itens.map(item => `<li>${item.quantidade}x ${item.nome} - R$ ${item.preco.toFixed(2).replace('.', ',')}</li>`).join('')}
                   </ul>
+                  ${pedido.observacoes && pedido.observacoes !== 'Nenhuma' ? `<hr><h4>Observações:</h4><p>${pedido.observacoes}</p>` : ''}
                   <hr>
                   <p><strong>Subtotal:</strong> R$ ${pedido.subtotal.toFixed(2).replace('.', ',')}</p>
                   <p><strong>Taxa de Entrega:</strong> R$ ${pedido.taxaEntrega.toFixed(2).replace('.', ',')}</p>
                   <p><strong>Total do Pedido:</strong> R$ ${pedido.total.toFixed(2).replace('.', ',')}</p>
+                  <p><strong>Pagamento:</strong> ${pedido.formaPagamento || 'Não informado'}</p> ${pedido.trocoPara ? `<p><strong>Troco para:</strong> R$ ${pedido.trocoPara.toFixed(2).replace('.', ',')}</p>` : ''}
                   
                   ${pedido.tipoEntrega === 'entrega' ? `
                       <hr><h4>Endereço de Entrega:</h4>
@@ -151,9 +153,6 @@ function carregarPedidos() {
                       <p>CEP: ${pedido.endereco.cep}</p>
                       ${pedido.endereco.complemento ? `<p>Comp: ${pedido.endereco.complemento}</p>` : ''}
                   ` : `<hr><h4>Tipo de Pedido:</h4><p>Retirada no Local</p>`}
-                  
-                  ${pedido.observacoes && pedido.observacoes !== 'Nenhuma' ? `<hr><h4>Observações:</h4><p>${pedido.observacoes}</p>` : ''}
-                  ${pedido.trocoPara ? `<hr><p><strong>Troco para:</strong> R$ ${pedido.trocoPara.toFixed(2).replace('.', ',')}</p>` : ''}
                   
                   <div class="status-select-container">
                       <label for="status-select-${pedidoId}">Mudar Status:</label>
