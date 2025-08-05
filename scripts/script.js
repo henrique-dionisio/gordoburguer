@@ -94,14 +94,14 @@ function estamosAbertosAgora() {
     } else {
         let proximoHorarioMsg = "";
         if (agoraEmMinutos < abreEmMinutos) {
-            proximoHorarioMsg = `Abrimos hoje (${configHoje.nomeDia}) às ${String(configHoje.abre.h).padStart(2, "0")}:${String(configHoje.abre.m).padStart(2, "0")}.`;
+            proximoHorarioMsg = `Abriremos hoje (${configHoje.nomeDia}) às ${String(configHoje.abre.h).padStart(2, "0")}:${String(configHoje.abre.m).padStart(2, "0")}.`;
         } else {
             let diaSeguinte = (diaHoje + 1) % 7;
             let tentativas = 0;
             while (tentativas < 7) {
                 const configDiaSeguinte = horariosFuncionamento[diaSeguinte];
                 if (configDiaSeguinte) {
-                    proximoHorarioMsg = `Abrimos ${configDiaSeguinte.nomeDia} às ${String(configDiaSeguinte.abre.h).padStart(2, "0")}:${String(configDiaSeguinte.abre.m).padStart(2, "0")}.`;
+                    proximoHorarioMsg = `Abriremos ${configDiaSeguinte.nomeDia} às ${String(configDiaSeguinte.abre.h).padStart(2, "0")}:${String(configDiaSeguinte.abre.m).padStart(2, "0")}.`;
                     break;
                 }
                 diaSeguinte = (diaSeguinte + 1) % 7;
@@ -279,6 +279,27 @@ function fecharFormulario() { const el = document.getElementById("formulario"); 
 function formatarCEP(campo) { let v = campo.value.replace(/\D/g, ""); if (v.length > 5) v = `${v.slice(0, 5)}-${v.slice(5, 8)}`; campo.value = v; }
 function buscarCep() { const el = document.getElementById("cep"); if (!el) return; const cep = el.value.replace(/\D/g, ""); if (cep.length !== 8) return; fetch(`https://viacep.com.br/ws/${cep}/json/`).then(res => res.json()).then(data => { if (data.erro) { alert("CEP não encontrado."); return; } document.getElementById("rua").value = data.logradouro; document.getElementById("bairro").value = data.bairro; }).catch(() => alert("Erro ao buscar CEP.")); }
 
+// NOVA FUNÇÃO: Formata o número de telefone enquanto o usuário digita
+function formatarTelefone(event) {
+    const input = event.target;
+    // 1. Remove tudo que não é número e limita a 11 dígitos (DDD + 9 dígitos)
+    let numeros = input.value.replace(/\D/g, '').substring(0, 11);
+
+    // 2. Aplica a máscara de formatação dinamicamente
+    let formatado = numeros;
+    if (numeros.length > 2) {
+        // Formato: (XX) X...
+        formatado = `(${numeros.substring(0, 2)}) ${numeros.substring(2)}`;
+    }
+    if (numeros.length > 7) {
+        // Formato: (XX) XXXXX-XXXX
+        formatado = `(${numeros.substring(0, 2)}) ${numeros.substring(2, 7)}-${numeros.substring(7, 11)}`;
+    }
+    
+    // 3. Atualiza o valor no campo
+    input.value = formatado;
+}
+
 function exibirAlertaCustomizado(msg, tipo = "info", duracao = 3000) { let div = document.getElementById("alerta-customizado-localStorage"); if (!div) { div = document.createElement("div"); div.id = "alerta-customizado-localStorage"; document.body.appendChild(div); } div.textContent = msg; div.className = `alerta-ls ${tipo} show`; setTimeout(() => { div.classList.remove("show"); }, duracao); }
 function salvarInformacoesCliente() { const info = { nome: document.getElementById("nome").value.trim(), cep: document.getElementById("cep").value.trim(), rua: document.getElementById("rua").value.trim(), bairro: document.getElementById("bairro").value.trim(), numero: document.getElementById("numero").value.trim(), complemento: document.getElementById("complemento").value.trim() }; if (info.nome && info.cep) { localStorage.setItem(LOCAL_STORAGE_KEY_USER_INFO, JSON.stringify(info)); exibirAlertaCustomizado("Suas informações foram salvas!", "success"); } else { document.getElementById("lembrar-info-checkbox").checked = false; exibirAlertaCustomizado("Preencha nome e CEP para salvar.", "info"); } }
 function carregarInformacoesCliente() { const infoSalva = localStorage.getItem(LOCAL_STORAGE_KEY_USER_INFO); const checkbox = document.getElementById("lembrar-info-checkbox"); if (infoSalva) { try { const info = JSON.parse(infoSalva); for (const key in info) { const el = document.getElementById(key); if (el) el.value = info[key]; } if (checkbox) checkbox.checked = true; if (info.cep && !info.rua) buscarCep(); } catch (e) { localStorage.removeItem(LOCAL_STORAGE_KEY_USER_INFO); if (checkbox) checkbox.checked = false; } } else if (checkbox) checkbox.checked = false; }
@@ -287,7 +308,7 @@ function apagarInformacoesCliente() { localStorage.removeItem(LOCAL_STORAGE_KEY_
 function enviarPedido() {
     const user = auth.currentUser; if (!user) { alert("Por favor, faça o login para finalizar seu pedido!"); return; }
     const nome = document.getElementById("nome").value, telefone = document.getElementById("telefone").value, observacoes = document.getElementById("observacoes").value, formaPagamento = document.getElementById("pagamento").value, trocoInput = document.getElementById("troco_para").value;
-    if (!nome || !tipoEntregaSelecionado || !formaPagamento) { alert("Preencha todos os campos obrigatórios."); return; } if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); return; }
+    if (!nome || !telefone || !tipoEntregaSelecionado || !formaPagamento) { alert("Preencha todos os campos obrigatórios."); return; } if (carrinho.length === 0) { alert("Seu carrinho está vazio!"); return; }
     const subtotal = carrinho.reduce((acc, i) => acc + i.preco * i.quantidade, 0); const total = subtotal + taxaEntregaAtual;
     const pedido = { userId: user.uid, userName: nome, userTelefone: telefone, userEmail: user.email, itens: carrinho, subtotal, taxaEntrega: taxaEntregaAtual, total, tipoEntrega: tipoEntregaSelecionado, formaPagamento, observacoes: observacoes || "Nenhuma", timestamp: firebase.firestore.FieldValue.serverTimestamp(), status: "Recebido" };
     if (tipoEntregaSelecionado === "entrega") {
@@ -364,11 +385,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (todosButton) todosButton.classList.add("active");
     if (typeof atualizarContadorCarrinho === "function") atualizarContadorCarrinho();
     if (typeof gerenciarEstadoLoja === "function") gerenciarEstadoLoja();
+    
     const selectPagamento = document.getElementById("pagamento");
     if (selectPagamento) selectPagamento.addEventListener("change", verificarCampoTroco);
+
     const lembrarCheckbox = document.getElementById("lembrar-info-checkbox");
     if (lembrarCheckbox) {
         if (localStorage.getItem(LOCAL_STORAGE_KEY_USER_INFO)) lembrarCheckbox.checked = true;
         lembrarCheckbox.addEventListener("change", function () { this.checked ? salvarInformacoesCliente() : apagarInformacoesCliente(); });
+    }
+
+    const campoTelefone = document.getElementById('telefone');
+    if (campoTelefone) {
+        campoTelefone.addEventListener('input', formatarTelefone);
     }
 });
