@@ -5,11 +5,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Painel Admin - GordoBurger</title>
         <link rel="icon" type="image/png" href="/assets/logo-icon.webp">
-        <link rel="stylesheet" href="/styles/admin.css"> 
+        <link rel="stylesheet" href="styles/admin.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     </head>
 
     <body>
+        <div id="admin-notification" class="admin-notification">
+            <span id="notification-icon">✓</span>
+            <span id="notification-message">Item adicionado com sucesso!</span>
+        </div>
+
         <div id="login-container" class="container">
             <h1>Painel de Pedidos</h1>
             <div class="login-box">
@@ -24,30 +29,137 @@
             </div>
         </div>
 
-        <div id="admin-panel" class="container" style="display: none;">
-            <header class="admin-header">
-                <h1>Pedidos GordoBurguer</h1>
-                <button id="btn-admin-logout">Sair</button>
-            </header>
+        <div id="admin-panel" class="admin-panel-container">
+    
+            <nav class="admin-sidebar">
+                <div class="sidebar-header">
+                    <h2>GordoBurguer<br>Admin</h2>
+                </div>
+                <ul class="sidebar-nav">
+                    <li><a href="#" class="nav-link active" data-section="section-pedidos">📝 Pedidos<span id="badge-pedidos-recebidos" class="badge">0</span></a></li>
+                    <li><a href="#" class="nav-link" data-section="section-cardapio">🍔 Gerenciar Cardápio</a></li>
+                    <li><a href="#" class="nav-link" data-section="section-horarios">⏰ Gerenciar Horários</a></li>
+                    <li><a href="#" class="nav-link" data-section="section-dashboard">📊 Dashboards (Em breve)</a></li>
+                </ul>
+                <div class="sidebar-footer">
+                    <button id="btn-admin-logout">Sair</button>
+                </div>
+            </nav>
 
-            <div class="filtros-status-container">
-                <button class="btn-filtro-status active" data-status="todos">Todos Ativos</button>
-                <button class="btn-filtro-status" data-status="Recebido">Recebidos</button>
-                <button class="btn-filtro-status" data-status="Em Preparo">Em Preparo</button>
-                <button class="btn-filtro-status" data-status="Pronto para Retirada">Pronto p/ Retirada</button>
-                <button class="btn-filtro-status" data-status="Saiu para Entrega">Saiu p/ Entrega</button>
-                <button class="btn-filtro-status" data-status="Concluído">Concluídos</button>
-            </div>
+            <main class="admin-content">
 
-            <main id="pedidos-container">
-                <p>Aguardando novos pedidos...</p>
+                <section id="section-pedidos" class="admin-section active">
+                    <header class="admin-header">
+                        <h1>Painel de Pedidos</h1>
+                    </header>
+                    
+                    <div class="filtros-status-container">
+                        <button class="btn-filtro-status active" data-status="todos">Todos Ativos</button>
+                        <button class="btn-filtro-status" data-status="Recebido">Recebidos</button>
+                        <button class="btn-filtro-status" data-status="Em Preparo">Em Preparo</button>
+                        <button class="btn-filtro-status" data-status="Pronto para Retirada">Pronto p/ Retirada</button>
+                        <button class="btn-filtro-status" data-status="Saiu para Entrega">Saiu p/ Entrega</button>
+                        <button class="btn-filtro-status" data-status="Concluído">Concluídos</button>
+                    </div>
+
+                    <div id="pedidos-container" class="pedidos-container-grid">
+                        <p>Aguardando novos pedidos...</p>
+                    </div>
+                </section>
+
+                <section id="section-cardapio" class="admin-section">
+                    <header class="admin-header">
+                        <h1>Gerenciar Cardápio</h1>
+                    </header>
+                    
+                    <form id="form-item-cardapio">
+                        <input type="hidden" id="item-id">
+                        <input type="hidden" id="item-imagem-url-atual">
+                        
+                        <div class="form-grid">
+                            <div class="form-group span-2">
+                                <label for="item-nome">Nome do Item:</label>
+                                <input type="text" id="item-nome" placeholder="X-Tudo" required>
+                            </div>
+
+                            <div class="form-group span-2">
+                                <label for="item-descricao">Descrição:</label>
+                                <textarea id="item-descricao" placeholder="Ingredientes..." rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="item-preco">Preço (use ponto, ex: 16.50):</label>
+                                <input type="number" id="item-preco" placeholder="16.50" step="0.01" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="item-categoria">Categoria:</label>
+                                <select id="item-categoria" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="hamburguer">Hambúrguer</option>
+                                    <option value="combo-familia">Combo Família</option>
+                                    <option value="porcao-batata">Porção de Batata</option>
+                                    <option value="bebidas">Bebidas</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group span-2">
+                                <label for="item-imagem-upload">Imagem (apenas se for alterar):</label>
+                                <input type="file" id="item-imagem-upload">
+                            </div>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="submit" id="btn-salvar-item">Salvar Item</button>
+                            <button type="button" id="btn-novo-item">Cancelar (Novo Item)</button>
+                        </div>
+                    </form>
+
+                    <hr>
+
+                    <h3>Itens Atuais no Cardápio</h3>
+                    <div id="lista-itens-cardapio" class="pedidos-container-grid">
+                        <p>Carregando itens...</p>
+                    </div>
+                </section>
+
+                <section id="section-horarios" class="admin-section">
+                    <header class="admin-header">
+                        <h1>Gerenciar Horário de Funcionamento</h1>
+                    </header>
+
+                    <form id="form-horarios">
+                        <p>Ajuste os horários de abertura e fechamento para cada dia. Use o formato 24h (ex: 10:30, 22:00).</p>
+                        
+                        <div id="horarios-inputs-container">
+                            <p>Carregando horários...</p>
+                        </div>
+
+                        <div class="form-buttons">
+                            <button type="submit" id="btn-salvar-horarios">Salvar Horários</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section id="section-dashboard" class="admin-section">
+                    <header class="admin-header">
+                        <h1>Dashboards</h1>
+                    </header>
+                    <p>Em breve você terá acesso a gráficos e estatísticas sobre seus pedidos e vendas.</p>
+                </section>
+
             </main>
         </div>
+
+        <audio id="admin-notification-sound" preload="auto">
+            <source src="/assets/notification-sound.mp3" type="audio/mpeg">
+        </audio>
 
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
         
-        <script src="/scripts/admin.js"></script> 
+        <script src="scripts/admin.js"></script> 
     </body>
 </html>

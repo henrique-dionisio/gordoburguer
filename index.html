@@ -7,8 +7,8 @@
     <meta name="keywords" content="hamburguer, food truck, gordoburger, artesanal, lanche">
     <meta name="author" content="GordoBurger">
     <title>GordoBurguer | Hamburgueria Artesanal</title>
-    <link rel="icon" type="image/png" href="/assets/logo-icon.webp">
-    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="icon" type="image/png" href="assets/logo-icon.webp">
+    <link rel="stylesheet" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,7 +16,7 @@
     <header>
         <div class="container">
             <div class="logo">
-                <img src="/assets/logo-gordoburger.webp" alt="logo do GordoBurger">
+                <img src="assets/logo-gordoburger.webp" alt="logo do GordoBurger">
                 <h1>GordoBurguer</h1>
             </div>
             <nav>
@@ -64,136 +64,8 @@
                 <button class="btn-categoria" data-filter="bebidas" onclick="filtrarCardapio('bebidas')">Bebidas</button>
             </div>
 
-            <div class="itens-cardapio">
-
-                <div class="item" data-category="porcao-batata" onclick="abrirModal('Porção de Batata', 'Batata frita 250 gramas.', 'R$ 16,00')">
-                    <img src="assets/porcao-batata.webp" alt="Porção de Batata">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍟 Porção de Batata</h3>
-                        <p  class="descricao-lanche">Batata frita 250 gramas.</p>
-                        <span>R$ 16,00</span>
-                        <button onclick="adicionarAoCarrinho('Porção de Batata', 'R$ 16,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="combo-familia" onclick="abrirModal('Combo Família', '5 X-Salada + Refrigerante 2L.', 'R$ 85,00')">
-                    <img src="assets/combo-familia.webp" alt="Combo Família">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔🥤 Combo Família</h3>
-                        <p  class="descricao-lanche">5 X-Salada + Refrigerante 2L.</p>
-                        <span>R$ 85,00</span>
-                        <button onclick="adicionarAoCarrinho('Combo Família', 'R$ 85,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="bebidas" onclick="abrirModal('Guaraná 2L', 'R$ 12,00')">
-                    <img src="assets/guarana-2l.webp" alt="Guaraná 2L">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🥤 Guaraná 2L</h3>
-                        <span>R$ 12,00</span>
-                        <button onclick="adicionarAoCarrinho('Guaraná 2L', 'R$ 12,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="bebidas" onclick="abrirModal('Coca-Cola 2L', 'R$ 13,00')">
-                    <img src="assets/coca-cola-2l.webp" alt="Coca-Cola 2L">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🥤 Coca-Cola 2L</h3>
-                        <span>R$ 13,00</span>
-                        <button onclick="adicionarAoCarrinho('Coca-Cola 2L', 'R$ 13,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="bebidas" onclick="abrirModal('Coca lata', 'R$ 6,00')">
-                    <img src="assets/coca-lata.webp" alt="Coca lata">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🥤 Coca lata</h3>
-                        <span>R$ 6,00</span>
-                        <button onclick="adicionarAoCarrinho('Coca lata', 'R$ 6,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="bebidas" onclick="abrirModal('Guaraná lata', 'R$ 6,00')">
-                    <img src="assets/guarana-lata.webp" alt="Guaraná lata">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🥤 Guaraná lata</h3>
-                        <span>R$ 6,00</span>
-                        <button onclick="adicionarAoCarrinho('Guaraná lata', 'R$ 6,00'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Burguer', 'Pão + hambúrguer + presunto, mussarela e maionese.', 'R$ 15,50')">
-                    <img src="assets/x-burguer.webp" alt="X Burguer">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Burguer</h3>
-                        <p class="descricao-lanche">Pão + hambúrguer + presunto, mussarela e maionese.</p>
-                        <span>R$ 15,50</span>
-                        <button onclick="adicionarAoCarrinho('X Burguer', 'R$ 15,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Salada', 'Pão + hambúrguer + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 16,50')">
-                    <img src="assets/x-salada.webp" alt="X Salada">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Salada</h3>
-                        <p class="descricao-lanche">Pão + hambúrguer + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
-                        <span>R$ 16,50</span>
-                        <button onclick="adicionarAoCarrinho('X Salada', 'R$ 16,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Salada Duplo', 'Pão + 2 hambúrgueres + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 22,50')">
-                    <img src="assets/x-salada-duplo.webp" alt="X Salada Duplo">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Salada Duplo</h3>
-                        <p class="descricao-lanche">Pão + 2 hambúrgueres + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
-                        <span>R$ 22,50</span>
-                        <button onclick="adicionarAoCarrinho('X Salada Duplo', 'R$ 22,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Bacon', 'Pão + hambúrguer + bacon + presunto, mussarela, maionese, ketchup, alface e tomate.', 'R$ 23,50')">
-                    <img src="assets/x-bacon.webp" alt="X Bacon">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Bacon</h3>
-                        <p class="descricao-lanche">Pão + hambúrguer + bacon + presunto, mussarela, maionese, ketchup, alface e tomate.</p>
-                        <span>R$ 23,50</span>
-                        <button onclick="adicionarAoCarrinho('X Bacon', 'R$ 23,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Tudo', 'Pão + hambúrguer + bacon + calabresa + ovo + presunto, milho, mussarela, maionese, ketchup, alface e tomate.', 'R$ 28,50')">
-                    <img src="assets/x-tudo.webp" alt="X Tudo">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Tudo</h3>
-                        <p class="descricao-lanche">Pão + hambúrguer + bacon + calabresa + ovo + presunto, milho, mussarela, maionese, ketchup, alface e tomate.</p>
-                        <span>R$ 28,50</span>
-                        <button onclick="adicionarAoCarrinho('X Tudo', 'R$ 28,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
-                <div class="item" data-category="hamburguer" onclick="abrirModal('X Egg', 'Pão + hambúrguer + ovo + mussarela, maionese, ketchup, alface e tomate.', 'R$ 18,50')">
-                    <img src="assets/x-egg.webp" alt="X Egg">
-                    <div class="item-content">
-                        <p class="aviso-ilustrativo">Imagens meramente ilustrativas</p>
-                        <h3>🍔 X Egg</h3>
-                        <p class="descricao-lanche">Pão + hambúrguer + ovo + mussarela, maionese, ketchup, alface e tomate.</p>
-                        <span>R$ 18,50</span>
-                        <button onclick="adicionarAoCarrinho('X Egg', 'R$ 18,50'); event.stopPropagation();">Adicionar ao Carrinho</button>
-                    </div>
-                </div>
-
+            <div class="itens-cardapio"> 
+                <p id="cardapio-loading" style="color: white; font-size: 1.2rem;">Carregando cardápio...</p>
             </div>
         </div>
     </section>
@@ -274,10 +146,10 @@
             <h3>Como prefere receber?</h3>
             <div class="opcoes-tipo-entrega">
                 <div class="opcao-entrega" id="btn-retirada" onclick="selecionarTipoEntrega('retirada')">
-                    <img src="/assets/icon-retirada.webp" alt="Ícone de Retirada"> <span>Retirada no Local</span>
+                    <img src="assets/icon-retirada.webp" alt="Ícone de Retirada"> <span>Retirada no Local</span>
                 </div>
                 <div class="opcao-entrega" id="btn-entrega" onclick="selecionarTipoEntrega('entrega')">
-                    <img src="/assets/icon-entrega.webp" alt="Ícone de Entrega"> <span>Entrega</span>
+                    <img src="assets/icon-entrega.webp" alt="Ícone de Entrega"> <span>Entrega</span>
                 </div>
             </div>
         </div>
@@ -299,11 +171,6 @@
                 <input type="text" id="complemento" placeholder="Apartamento, bloco, ponto de referência..." required>
             </label>
             <p class="taxa-entrega" id="display-taxa-entrega">🏍️ Taxa de Entrega: (Escolha Entrega)</p>
-        </div>
-
-        <div class="lembrar-info-container">
-            <input type="checkbox" id="lembrar-info-checkbox">
-            <label for="lembrar-info-checkbox">Lembrar minhas informações para as próximas compras</label>
         </div>
 
         <div id="container-pagamento" style="display:none;">
@@ -337,12 +204,12 @@
         <div class="container">
             <h2>Galeria de Sabores</h2>
             <div class="carousel">
-                <div class="slide"><img src="/assets/x-tudo.webp" alt="X-Tudo"></div>
-                <div class="slide"><img src="/assets/porcao-batata.webp" alt="Batata frita"></div>
-                <div class="slide"><img src="/assets/combo-familia.webp" alt="Combo família"></div>
-                <div class="slide"><img src="/assets/x-egg.webp" alt="X-Egg"></div>
-                <div class="slide"><img src="/assets/x-salada-duplo.webp" alt="X-Salada"></div>
-                <div class="slide"><img src="/assets/x-tudo.webp" alt="X-Tudo"></div>
+                <div class="slide"><img src="assets/x-tudo.webp" alt="X-Tudo"></div>
+                <div class="slide"><img src="assets/porcao-batata.webp" alt="Batata frita"></div>
+                <div class="slide"><img src="assets/combo-familia.webp" alt="Combo família"></div>
+                <div class="slide"><img src="assets/x-egg.webp" alt="X-Egg"></div>
+                <div class="slide"><img src="assets/x-salada-duplo.webp" alt="X-Salada"></div>
+                <div class="slide"><img src="assets/x-tudo.webp" alt="X-Tudo"></div>
             </div>
         </div>
     </section>
@@ -355,7 +222,7 @@
             <p>☎️(31) 99914-9772</p><br>
             <div class="instagram-contato">
                 <a href="https://www.instagram.com/luizhenrique_dionisio/" target="_blank" rel="noopener noreferrer">
-                    <img src="/assets/icon-instagram.webp" alt="Instagram GordoBurger" class="icone-social">
+                    <img src="assets/icon-instagram.webp" alt="Instagram GordoBurger" class="icone-social">
                     @luizhenrique_dionisio
                 </a>
 
@@ -363,11 +230,9 @@
 
             <div class="contato-info">
 
-                <div class="horarios">
+                <div class="horarios" id="horarios-display-container">
                     <h3>⏰ Horários de Funcionamento</h3>
-                    <p>🗓️ Segunda a Sexta: 10:30 às 22:00</p>
-                    <p>🗓️ Sábado e Domingo: 10:00 às 22:00</p>
-                    <p>📍 Estamos aguardando seu pedido!</p>
+                    <p>Carregando horários...</p>
                 </div>
 
                 <div class="mapa">
@@ -378,6 +243,100 @@
         </div>
     </section>
 
+    <div id="modal-login-obrigatorio" class="modal"> 
+        <div class="modal-content" style="max-width: 450px; text-align: center;"> 
+            <span class="close" onclick="fecharModalLoginObrigatorio()">×</span>
+            <h3>Ops! Faça login para pedir</h3>
+            <p>Para adicionar itens ao carrinho e fazer seu pedido, você precisa estar conectado.</p>
+            <p style="margin-top: 20px;">
+                <a href="#" id="btn-login-modal" class="btn-login-google-style"> 
+                    <img src="assets/google-g-logo.webp" alt="Logo Google" class="google-logo">
+                    Entrar com Google
+                </a>
+            </p>
+            <p style="font-size: 0.8em; color: #888; margin-top: 15px;">É rápido e seguro!</p>
+        </div>
+    </div>
+
+    <div id="modal-completar-perfil" class="modal"> 
+        <div class="modal-content" style="max-width: 500px; text-align: left;"> 
+            <h3>Quase lá! Complete seu perfil</h3>
+            <p>Precisamos de mais algumas informações para seus futuros pedidos.</p>
+
+            <form id="form-completar-perfil">
+                <label>Nome (como aparecerá nos pedidos):</label>
+                <input type="text" id="completar-nome" required>
+                
+                <label>Telefone/WhatsApp (para contato):</label>
+                <input type="tel" id="completar-telefone" placeholder="(XX) XXXXX-XXXX" required>
+                
+                <hr style="margin: 20px 0;">
+                <h4>Seu Endereço Principal</h4>
+                
+                <label>CEP:</label>
+                <input type="text" id="completar-cep" maxlength="9" placeholder="Digite seu CEP" oninput="formatarCEP(this)" onblur="buscarCepCompletarPerfil()" required>
+                
+                <label>Rua:</label>
+                <input type="text" id="completar-rua" placeholder="Rua" readonly>
+                
+                <label>Bairro:</label>
+                <input type="text" id="completar-bairro" placeholder="Bairro" readonly>
+                
+                <label>Número:</label>
+                <input type="text" id="completar-numero" placeholder="Número" required>
+                
+                <label>Complemento (Opcional):</label>
+                <input type="text" id="completar-complemento" placeholder="Apto, bloco, referência...">
+                
+                <div class="form-buttons" style="margin-top: 25px;"> 
+                    <button type="submit" id="btn-salvar-perfil-completo">Salvar e Continuar</button>
+                    <button type="button" class="btn-cancelar-perfil" onclick="fecharModalCompletarPerfil()">Cancelar</button> 
+                </div>
+                
+                <p id="completar-perfil-status" style="margin-top: 15px; text-align: center; font-weight: bold;"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-editar-perfil" class="modal"> 
+        <div class="modal-content" style="max-width: 500px; text-align: left;"> 
+            <h3>Edite seu Perfil</h3>
+
+            <form id="form-editar-perfil">
+                <label>Nome (como aparecerá nos pedidos):</label>
+                <input type="text" id="editar-nome" required>
+                
+                <label>Telefone/WhatsApp (para contato):</label>
+                <input type="tel" id="editar-telefone" placeholder="(XX) XXXXX-XXXX" required>
+                
+                <hr style="margin: 20px 0;">
+                <h4>Seu Endereço Principal</h4>
+                
+                <label>CEP:</label>
+                <input type="text" id="editar-cep" maxlength="9" placeholder="Digite seu CEP" oninput="formatarCEP(this)" onblur="buscarCepEditarPerfil()" required>
+                
+                <label>Rua:</label>
+                <input type="text" id="editar-rua" placeholder="Rua" readonly>
+                
+                <label>Bairro:</label>
+                <input type="text" id="editar-bairro" placeholder="Bairro" readonly>
+                
+                <label>Número:</label>
+                <input type="text" id="editar-numero" placeholder="Número" required>
+                
+                <label>Complemento (Opcional):</label>
+                <input type="text" id="editar-complemento" placeholder="Apto, bloco, referência...">
+                
+                <div class="form-buttons" style="margin-top: 25px;"> 
+                    <button type="submit" id="btn-salvar-perfil-editado">Salvar e Continuar</button>
+                    <button type="button" class="btn-cancelar-perfil" onclick="fecharModalEditarPerfil()">Cancelar</button> 
+                </div>
+                
+                <p id="editar-perfil-status" style="margin-top: 15px; text-align: center; font-weight: bold;"></p>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; 2025 GordoBurger - Todos os direitos reservados. | Este é um site fictício, criado apenas para fins de portfólio e demonstração.</p>
@@ -386,7 +345,7 @@
                 <a href="https://wa.me/5519994030068" target="_blank" rel="noopener noreferrer">
                     <span>Desenvolvido por</span>
                     <strong>Dionisio Web Solutions</strong>
-                    <img src="/assets/dws-logo.webp" alt="Logo Dionisio Web Solutions">
+                    <img src="assets/logo-icone.png" alt="Logo Dionisio Web Solutions">
                 </a>
             </div>
         </div>
@@ -404,13 +363,13 @@
 
     <!-- Audio para notificações -->
     <audio id="notification-sound" preload="auto">
-        <source src="/assets/notification-sound.mp3" type="audio/mpeg">
+        <source src="assets/notification-sound.mp3" type="audio/mpeg">
     </audio>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="/scripts/script.js"></script>
+    <script src="scripts/script.js"></script>
 
 </body>
 </html>
